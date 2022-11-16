@@ -8,7 +8,7 @@
     margin-top: 20px;      
 }
 .slider-wrap .slider-img {
-    max-width: 1007px;
+    max-width: 991px;
     margin-right: 180px; 
     border-radius: 15px;
 }
@@ -68,79 +68,4 @@
 }
 .slider-content .btn:hover{
     background-color: var(--black);
-}
-.slider-wrap .slick-dots{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    right: 0;
-    bottom: -41px;
-    display: flex;
-    align-items: center;
-}
-
-.slider-wrap .slick-dots li button{
-	display: flex;
-	/* width: 8px;
-    height: 12px; */
-    font-size: 0;
-	margin: 0px 5px;
-	-webkit-transition: all 0.15s linear;
-	-moz-transition: all 0.15s linear;
-	-o-transition: all 0.15s linear;
-	transition: all 0.15s linear;
-	outline: none;
-	position: relative;
-    text-indent: -9999999px;
-    border: none;
-    background: transparent;
-}
-/* 
-.slider-wrap .slick-dots li.slick-active button{
-    background-color: var(--primary);
-}
-.slider-wrap .slick-dots li.slick-active button,
-.slider-wrap .slick-dots li:hover{
-	background:var(--white);
-    border: 6px solid var(--primary);
-    width: 24px;
-    height: 18px;
-} */
-.slider-wrap .slick-dots li button:before,
-.slider-wrap .slick-dots li button:after {
-    width: 22px;
-    height: 22px;
-    
-    position: absolute;
-    content: "";
-    border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    -webkit-transition: all 0.25s linear;
-	-moz-transition: all 0.25s linear;
-	-o-transition: all 0.25s linear;
-	transition: all 0.25s linear;
-}
-
-.slider-wrap .slick-dots li button:before{
-    width: 2px;
-    height: 2px;
-    border: 1px solid var(--primary);
-    background-color: var(--white);
-}
-.slider-wrap .slick-dots li button:after{
-    width: 8px;
-    height: 8px;
-    background: var(--black);
-    border: transparent;
-}
-.slider-wrap .slick-dots li.slick-active button::before{
-    width: 22px;
-    height: 23px;
-}
-.slider-wrap .slick-dots li.slick-active button::after{
-    background-color: var(--primary);
 }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders, faBandAid, faDiamond, faMobilePhone, faBed, faPlug, faBasketball, faHeadphones, faPlantWilt, faStopwatch, faLightbulb, faAngleRight, faPhone, faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import './ThirdHeader.css'
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 function ThirdHeader() {
     // let [showAllDepartments, setShowAllDepartments] = useState(false);
     let [allDepartmentsClass, setAllDepartmentClass] = useState('do-not-show');
@@ -18,7 +18,7 @@ function ThirdHeader() {
     return (
         <div className="container">
             <div className="navbar-wrap">
-                <nav className="navbar navbar-expand-lg">
+                <nav className="navbar">
                     <div className="header-category">
                         <a href="#" className="cat-toggle">
                             <FontAwesomeIcon icon={faSliders} /> <div>All Departments</div>
@@ -71,7 +71,7 @@ function ThirdHeader() {
                             </li>
                         </ul>
                     </div>
-                    <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
+                    <button className="navbar-toggler" type="button" >
                         <div className="hamburger-toggle">
                             <div className="hamburger">
                                 <span></span>

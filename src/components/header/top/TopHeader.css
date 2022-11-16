@@ -1,0 +1,54 @@
+:root {
+    scroll-behavior: inherit;
+    --primary: #e23e9d;
+    --primary-rgb: 226, 62, 157;
+    --white: #ffffff;
+    --black: #000000;
+    --light-gray: #efefef;
+    --light-blue: #e7eaf2;
+    --footer-bg: #1f1f1f;
+    --footer-text: #8d8d8d;
+    --border-color: #e0e0e0;
+    --yellow: #ffa913;
+    --dark: #313233;
+    --body-color: #585858;
+    --error: #fe2724;
+    --transition: all 0.3s ease-in-out;
+}
+.top-head-bar{
+    font-size: 14px;
+    text-align: center;
+    background: var(--light-gray);
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.container1{
+    margin-left: 180px;
+    
+}
+.container2{
+    margin-right: 180px;
+}
+.top-head-bar .top-selectbox{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 0.5rem;
+    background: transparent;
+    border-color: transparent;
+    padding-left: 0;
+    padding-right: 20px;
+    font-weight: 600;
+    color: var(--black);
+}
+.top-selectbox .small::after {
+    height: 6px;
+    width: 6px;
+    margin-top: -15px;
+    right: 7px;
+}
+.small {
+    border: none;
+    background: var(--light-gray);
+}

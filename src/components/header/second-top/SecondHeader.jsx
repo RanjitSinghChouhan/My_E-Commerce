@@ -2,8 +2,10 @@ import React from 'react'
 import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchengin } from '@fortawesome/free-brands-svg-icons'
-import { faHeart, faShoppingBag } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faShoppingBag, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import './SecondHeader.css'
+import ReactTooltip from 'react-tooltip'
+import { Link, Outlet } from 'react-router-dom'
 function SecondHeader() {
     const categories = ['All Categories', `Women's Clothing`, `Men's Clothing`, 'Luggage & Bags']
     return (
@@ -33,12 +35,14 @@ function SecondHeader() {
                             </div> |
                             <div className="shop-btns">
                                 <a href="wishlist.html"><FontAwesomeIcon icon={faHeart} /></a>
-                                <a href="#" data-trigger="#shop_cart"><FontAwesomeIcon icon={faShoppingBag} /></a>
+                                <Link to='cart'><a href="#" data-trigger="#shop_cart" data-tip='Go To Shopping Cart'><FontAwesomeIcon icon={faShoppingCart} /></a></Link>
+                                <Outlet />
                             </div>
                         </div>
                     </div>
                 </div>
             </header >
+            <ReactTooltip />
         </div >
     )
 }

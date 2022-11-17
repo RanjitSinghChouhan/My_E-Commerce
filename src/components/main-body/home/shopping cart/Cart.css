@@ -1,0 +1,116 @@
+.breadcrumbs-wrapper{
+    background: url(../../../../assets/images/breadcrumbs_bg.jpg) repeat-x center;
+    background-size: cover;
+    margin-bottom: 3rem;
+    max-height: fit-content;
+    margin-top: 10px;
+}
+.breadcrumbs-wrapper .row{
+    align-items: center;
+    margin-right: 180px;
+}
+.breadcrumbs-wrapper .container{
+    display: flex;
+    margin-left: 180px;
+}
+img{
+    max-width: 400px;
+}
+.breadcrumbs-wrapper h1{
+    font-size: 5.125rem;
+    color: var(--black);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.breadcrumbs-wrapper .breadcrumb{
+    display: flex;
+    font-size: 2rem;
+    list-style: none;
+}
+.breadcrumbs-wrapper .breadcrumb a,
+.breadcrumb-item.active {
+    color: var(--black);
+}
+.breadcrumbs-wrapper .breadcrumb a:hover {
+    color: var(--footer-text);
+}
+.breadcrumbs-wrapper .breadcrumb-item + .breadcrumb-item{
+    font-weight: 500;
+}
+.breadcrumbs-wrapper .breadcrumb-item + .breadcrumb-item::before {
+    top: 1px;
+    color: var(--black);
+    position: relative;
+    
+    display: inline-block;
+    content: "//";
+    vertical-align: -0.125em;
+    background-size: 0.8rem 0.8rem;
+    width: 30px;
+}
+.breadcrumbs-wrapper .breadcrumb-item.active {
+    color: var(--primary);
+}
+li{
+    text-decoration: none;
+}
+.breadcrumbs-wrapper .text-muted {
+    color: var(--white) !important;
+    margin-top: 15px;
+    font-size: 1rem;
+    margin: 0;
+}
+.cart-table{
+    font-size: 1.125rem;
+    margin-left: 180px;
+    margin-right: 180px;
+}
+.cart-table .table .theme-body tr td,
+.cart-table .table .theme-body tr th{
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+}
+.cart-table .table .theme-body tr td,
+.cart-table .table .theme-body tr th{
+    vertical-align: middle;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.cart-table .table .table-light{
+    border: 0px solid #d4d7dd;
+}
+.cart-table .table .table-light tr th{
+    padding: 1.5rem 1rem;
+    background: #e7eaf2;
+    white-space: nowrap;
+    width: 300px;
+}
+.quantity {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    border-radius: 100px;
+    display: inline-flex;
+    padding: 0.3rem 1.2rem;
+}
+.quantity button,
+.quantity input{
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+.quantity input{
+    width: 40px;
+    text-align: center;
+    color: var(--black);
+    pointer-events: none;
+    font-size: 1.25rem;
+}
+.quantity button{
+    color: #414961;
+}
+
+.quantity button:hover{
+    color: var(--primary);
+}

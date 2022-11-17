@@ -104,6 +104,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    text-decoration: none;
 }
 .header-category > a {
     display: flex;

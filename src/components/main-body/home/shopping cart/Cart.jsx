@@ -1,12 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom';
 import brdscrbImg from '../../../../assets/images/breadcrumbs_img.png';
 import './Cart.css';
 import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCartProduct, increaseQuantity } from '../../../../redux/products/productsAction';
 
 function Cart() {
-    const headers = ["", 'Product', 'Price', 'Quantity', 'Total']
+    const headers = ["", 'Product', 'Price', 'Quantity', 'Total'];
+    const cartList = useSelector(state => state.cartList);
+    const dispatch = useDispatch();
     return (
         <div>
             <section className="breadcrumbs-wrapper">
@@ -34,33 +38,35 @@ function Cart() {
                         </tr>
                     </thead>
                     <tbody className="theme-body">
-                        <tr>
-                            <th scope="row">
-                                &nbsp;
-                            </th>
-                            <td>
-                                <div className="item-product">
-                                    <span className="img-wrap"><img src="assets/images/category/category_img_1.png" alt="" /></span>
-                                    <span>New color Lipstick</span>
-                                </div>
-                            </td>
-                            <td><strong>$120.00</strong></td>
-                            <td>
-                                <div className="quantity">
-                                    <button className="minus-btn" type="button" name="button">
-                                        <FontAwesomeIcon icon={faMinus} />
-                                    </button>
-                                    <input type="text" name="name" value="0" />
-                                    <button className="plus-btn" type="button" name="button">
-                                        <FontAwesomeIcon icon={faPlus} />
-                                    </button>
-                                </div>
-                            </td>
-                            <td className="text-nowrap"><strong>$120.00</strong> <a href="#" className="cart-delete"><FontAwesomeIcon icon={faTrash} /></a></td>
-                        </tr>
+                        {cartList.map((product, index) => {
+                            return <tr key={index}>
+                                <td>
+                                    <div className="item-product">
+                                        <span className="img-wrap"><img src={product.image} alt="" /></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="item-product">
+                                        <span><strong>{product.name}</strong></span>
+                                    </div>
+                                </td>
+                                <td><strong>{product.price}</strong></td>
+                                <td>
+                                    <div className="quantity">
+                                        <button className="minus-btn" type="button" name="button">
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </button>
+                                        <input type="text" name="name" value={product.quantity} />
+                                        <button onClick={() => dispatch(increaseQuantity(product.id))} className="plus-btn" type="button" name="button">
+                                            <FontAwesomeIcon icon={faPlus} />
+                                        </button>
+                                    </div>
+                                </td>
+                                <td className="text-nowrap"><strong>{product.price * product.quantity}</strong> <button onClick={() => dispatch(removeCartProduct(product.id))} className="cart-delete"><FontAwesomeIcon icon={faTrash} /></button></td>
+                            </tr>
+                        })}
                     </tbody>
                 </table>
-
             </div>
         </div>
     )

@@ -1,16 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom';
 import brdscrbImg from '../../../../assets/images/breadcrumbs_img.png';
 import './Cart.css';
 import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import { removeCartProduct, increaseQuantity } from '../../../../redux/products/productsAction';
+import { removeCartProduct, increaseQuantity, decreaseQuantity, loadCartTotals } from '../../../../redux/products/productsAction';
 
 function Cart() {
     const headers = ["", 'Product', 'Price', 'Quantity', 'Total'];
     const cartList = useSelector(state => state.cartList);
+    const cartTotal = useSelector(state => state.cartTotal);
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(loadCartTotals())
+    }, [dispatch(loadCartTotals())])
+    let total = 0
+    cartTotal.map(item => total += item.cost)
     return (
         <div>
             <section className="breadcrumbs-wrapper">
@@ -53,7 +59,7 @@ function Cart() {
                                 <td><strong>{product.price}</strong></td>
                                 <td>
                                     <div className="quantity">
-                                        <button className="minus-btn" type="button" name="button">
+                                        <button onClick={() => dispatch(decreaseQuantity(product.id))} className="minus-btn" type="button" name="button">
                                             <FontAwesomeIcon icon={faMinus} />
                                         </button>
                                         <input type="text" name="name" value={product.quantity} />
@@ -67,6 +73,39 @@ function Cart() {
                         })}
                     </tbody>
                 </table>
+            </div>
+            <div className="cart-checkout-section">
+                <div className="coupon">
+                    <h3>Coupon Discount</h3>
+                    <p>Enter your coupon code if you have one.</p>
+                    <div>
+                        <input type="text" className="form-control" name="name" placeholder="Coupon code" />
+                    </div>
+                    <div>
+                        <button className="btn btn-dark">Apply Coupon</button>
+                    </div>
+                </div>
+                <div>
+                    <div className="cart-totals">
+                        <div className="order-list">
+                            <ul className="list-unstyled">
+                                {cartTotal.map(item => {
+                                    return <li key={item.id}>
+                                        <span>{item.name}</span>
+                                        <span>${item.cost}</span>
+                                    </li>
+                                })}
+                            </ul>
+                        </div>
+                        <div className="total-count">
+                            <span>Total</span>
+                            <span className="txt-pink">${total}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button className="btn btn-primary">Proceed to checkout</button>
+                    </div>
+                </div>
             </div>
         </div>
     )

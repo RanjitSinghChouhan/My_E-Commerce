@@ -24,6 +24,12 @@ export const PRODUCTS_LIST = [
     { id: 6, image: shopImg6, over: shopImgOver6, name: 'Makeup-Kit', price: 200, actualPrice: 360, quantity: 1 },
     { id: 7, image: shopImg7, over: shopImgOver7, name: 'Lipstick', price: 120, actualPrice: 160, quantity: 1 },
     { id: 8, image: shopImg8, over: shopImgOver8, name: 'Perfumes for Girls', price: 100, actualPrice: 210, quantity: 1 }
+];
+
+export const CART_TOTALS = [
+    { id: 1, name: 'Sub-Total', cost: 0 },
+    { id: 2, name: 'Shipping', cost: 0 },
+    { id: 3, name: 'Tax', cost: 0 }
 ]
 
 export const PRODUCT_LIST = 'PRODUCT_LIST';
@@ -31,3 +37,5 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const CART_LIST = 'CART_LIST';
 export const REMOVE_CART_PRODUCT = 'REMOVE_CART_PRODUCT'
 export const INCREASE_QUANTITY = 'INCREASE_QUANTITY'
+export const DECREASE_QUANTITY = 'DECREASE_QUANTITY'
+export const CART_TOTAL = 'CART_TOTAL'

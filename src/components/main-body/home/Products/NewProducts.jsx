@@ -21,7 +21,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                 <div className="text-content">
                     <h2>New Products</h2>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form o</p>
-                    <a href="#" className="btn">COMPRA AHORA <FontAwesomeIcon icon={faAngleRight} /></a>
+                    <button className="btn">COMPRA AHORA <FontAwesomeIcon icon={faAngleRight} /></button>
                 </div>
             </div>
             <div className="shop-product-list">

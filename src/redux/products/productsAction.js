@@ -1,4 +1,4 @@
-import { ADD_TO_CART, INCREASE_QUANTITY, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT } from "./productTypes";
+import { ADD_TO_CART, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, INCREASE_QUANTITY, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT } from "./productTypes";
 
 export const loadProductList = () => {
     return {
@@ -26,5 +26,19 @@ export const increaseQuantity = (id) => {
     return {
         type: INCREASE_QUANTITY,
         payload: id
+    }
+}
+
+export const decreaseQuantity = (id) => {
+    return {
+        type: DECREASE_QUANTITY,
+        payload: id
+    }
+}
+
+export const loadCartTotals = () => {
+    return {
+        type: CART_TOTAL,
+        payload: CART_TOTALS
     }
 }

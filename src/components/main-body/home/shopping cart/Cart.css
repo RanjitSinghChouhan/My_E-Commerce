@@ -166,6 +166,7 @@ li{
     box-shadow: none;
 }
 
+
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -208,10 +209,10 @@ li{
 }
 
 .cart-totals {
-    border-radius: 10px;
+    border-radius: 0px;
     background-color: #e7eaf2;
     min-width: 300px;
-    margin-bottom: 2rem;
+    
     border: 1px solid #d4d7dd;
 }
 .cart-totals .order-list{
@@ -219,8 +220,8 @@ li{
 }
 .order-list ul li:not(:last-child) {
     border-bottom: 1px solid #5b76c0;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .cart-totals .order-list ul li {   
     display: flex;
@@ -229,7 +230,16 @@ li{
     color: var(--black);
     align-items: flex-end;
 }
+.cart-totals .order-list ul .cart-elements{
+    display: block;
 
+}
+.cart-totals .order-list ul .cart-elements label{
+    font-size: 1.25rem;
+}
+.cart-totals .order-list ul .cart-elements p{
+    padding-left: 1.8rem;
+}
 .cart-totals .order-list ul li span{
     font-weight: 600;
 }
@@ -246,11 +256,21 @@ li{
     color: var(--black);
     font-weight: 600;
     border-top: 1px solid #c5c8d2;
-    border-radius: 10px;
 }
 .cart-totals .total-count .txt-pink{
     margin-left: auto;
     color: var(--primary);    
+}
+
+.cart-totals .order-list ul li.info-bottom{
+    font-size: 0.9rem;
+    display: inherit;
+}
+.cart-totals .order-list ul li.info-bottom a{
+    color: var(--primary);
+}
+.cart-totals .order-list ul li.info-bottom a:hover{
+    color: var(--black);
 }
 .coupon{
     display: block;
@@ -260,4 +280,41 @@ li{
     height: fit-content;
     padding: 10px;
     border-radius: 5px;
+}
+
+.shipping-details {
+    padding: 2rem 0;
+    margin-left: 180px;
+    margin-right: 180px;
+}
+.shipping-details h3{
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+    color: var(--black);
+    font-weight: 500;
+}
+.shipping-details .form-label{
+    font-size: 1.125rem;
+}
+.shipping-details .row {
+    display: flex;
+    justify-content: space-between;
+}
+.shipping-details .place-order-wrap {
+    max-width: 420px;
+}
+.btn-square {
+    width: 420px;
+    margin-top: 0;
+}
+.billing-details{
+    text-align: left;
+}
+.billing-fields{
+    display: block;
+    width: 500px;
+}
+.cart-elements{
+    text-align: left;
 }

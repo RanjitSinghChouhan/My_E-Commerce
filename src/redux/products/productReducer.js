@@ -18,6 +18,7 @@ const productsReducer = (state = initialState, action) => {
         }
         case ADD_TO_CART:
             const product = action.list.find(product => product.id === action.payload)
+            alert(`${product.name} is Successfully Added to cart`)
             product.quantity = 1
             return {
                 ...state,

@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchengin } from '@fortawesome/free-brands-svg-icons'
-import { faHeart, faShoppingBag, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import './SecondHeader.css'
 import ReactTooltip from 'react-tooltip'
 import { Link, Outlet } from 'react-router-dom'
@@ -29,9 +29,9 @@ function SecondHeader() {
                         </div>
                         <div className="right-login">
                             <div className="bs-links">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#login">Login </a>
+                                <Link><button style={{ border: 'none', backgroundColor: 'white' }}>Login </button></Link>
                                 /
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#signup">SignUp </a>
+                                <Link to='signup'><button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>SignUp </button></Link>
                             </div> |
                             <div className="shop-btns">
                                 <a href="wishlist.html"><FontAwesomeIcon icon={faHeart} /></a>

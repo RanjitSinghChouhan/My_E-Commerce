@@ -18,7 +18,7 @@ function Checkout() {
                                 <div className="billing-details">
                                     <h3>Billing Details</h3>
 
-                                    <div className=" g-3">
+                                    <div>
                                         {billingFields.map(name => {
                                             return <div >
                                                 <label for="firstName" className="form-label billing-fields">{name}</label>

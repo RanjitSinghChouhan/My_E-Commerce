@@ -88,3 +88,6 @@
 .bs-links a:hover{
     color: var(--primary);
 }
+.loginSignup:hover{
+    color: var(--primary);
+}

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import store from '../../redux/store'
 import Checkout from './home/shopping cart/checkout/Checkout'
 import CartTable from './home/shopping cart/cart-table/CartTable'
-import MainCart from './home/shopping cart/cart-main-banner/MainCart'
+import SignUp from '../header/second-top/signup/SignUp'
 
 function MainBody() {
     return (
@@ -24,6 +24,7 @@ function MainBody() {
                     <Route path='about' element={<About />} />
                     <Route path='blog' element={<Blog />} />
                     <Route path='contact' element={<Contact />} />
+                    <Route path='signup' element={<SignUp />} />
                 </Routes>
             </div>
         </Provider>

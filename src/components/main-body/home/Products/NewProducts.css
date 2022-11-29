@@ -109,3 +109,27 @@
 .shop-product-wrap .content .rating{
     color: var(--yellow);
 }
+.pagination{
+    display: flex;
+    align-items: center;
+    background-color: rgb(156, 227, 236);
+    border-radius: 40px;
+}
+.react_paginate{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 50px;
+    padding-right: 30px;
+    height: 40px;
+    width: 800px;
+}
+.react_paginate li{
+    width: 10%;
+    height: 20px;
+}
+.react_paginate li:hover{
+    background-color: rgb(21, 125, 156);
+}

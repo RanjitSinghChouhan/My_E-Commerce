@@ -1,17 +1,30 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import banner1 from '../../../../assets/images/banner_bg_1.png'
 import { faAngleRight, faShoppingCart, faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
 import './NewProducts.css';
 import ReactTooltip from 'react-tooltip';
 import { connect } from 'react-redux';
 import { loadAddToCart, loadProductList } from '../../../../redux/products/productsAction';
+import ReactPaginate from 'react-paginate';
 
 
 function NewProducts({ productList, loadProductsList, loadAddToCart }) {
+    const [currentPage, setCurrentPage] = useState(0);
+    const [PER_PAGE, setPerPage] = useState(3);
+    const perPageArr = [3, 6, 9, 12]
     useEffect(() => {
         loadProductsList()
     })
+    const handlePageClick = ({ selected: selectedPage }) => {
+        setCurrentPage(selectedPage)
+    }
+    const handlePerPageSelect = (e) => {
+        setPerPage(e)
+    }
+    const offset = currentPage * PER_PAGE;
+    const paginatedProductList = productList.slice(offset, offset + parseInt(PER_PAGE));
+    const pageCount = Math.ceil(productList.length / PER_PAGE)
     return (
         <div className='new-products-container'>
             <div className="banner-highlights banner-highlights-img-1">
@@ -26,7 +39,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
             </div>
             <div className="shop-product-list">
 
-                {productList.map((product, index) => {
+                {paginatedProductList.map((product, index) => {
                     return <div className="shop-product-wrap" key={index}>
                         <div className="img">
                             <a href="product-details.html">
@@ -54,11 +67,28 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                                 <FontAwesomeIcon icon={faShoppingCart} />
                             </button>
                         </div>
-                        <ReactTooltip />
+
                     </div>
                 })}
             </div>
-
+            <div className='pagination'>
+                <div>
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel="Next"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={2}
+                        pageCount={pageCount}
+                        previousLabel="Previous"
+                        renderOnZeroPageCount={null}
+                        className='react_paginate'
+                    />
+                </div>
+                <div>
+                    <select data-tip="Number of Products Per Page" onChange={e => handlePerPageSelect(e.target.value)}>{perPageArr.map((perpage, index) => { return <option key={index} value={perpage}>{perpage}</option> })}</select>
+                </div>
+            </div>
+            <ReactTooltip />
         </div>
     )
 }

@@ -67,7 +67,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                                 <FontAwesomeIcon icon={faShoppingCart} />
                             </button>
                         </div>
-
+                        <ReactTooltip />
                     </div>
                 })}
             </div>

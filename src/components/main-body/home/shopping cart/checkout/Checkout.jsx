@@ -2,32 +2,104 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import '../Cart.css'
 import paypalLogo from '../../../../../assets/images/paypal_logo.png'
+import { useFormik } from 'formik';
+const initialValues = {
+    'First name': '',
+    'Last name': '',
+    'Company name': '',
+    'Country / Region': '',
+    'Street Address': '',
+    'Town / City': '',
+    'District': '',
+    'Postcode / ZIP (optional)': '',
+    'Phone': '',
+    'Email Address': ''
+};
+const onSubmit = values => {
+    alert(`Billing Details are successfully submitted as First name=${values['First name']}, Last name=${values['Last name']}, Company name=${values['Company name']}, Country / Region=${values['Country / Region']}, Street Address=${values['Street Address']}, Town / City=${values['Town / City']}, District=${values['District']}, Postcode / ZIP (optional)=${values['Postcode / ZIP (optional)']}, Phone=${values['Phone']}, Email Address=${values['Email Address']}`)
+}
+const validate = values => {
+    let errors = {};
+    if (!values['First name']) {
+        errors['First name'] = 'Required'
+    } else if (!/^[A-Za-z]+$/i.test(values['First name'])) {
+        errors['First name'] = 'Invalid Text Format'
+    }
+    if (!values['Last name']) {
+        errors['Last name'] = 'Required'
+    } else if (!/^[A-Za-z]+$/i.test(values['Last name'])) {
+        errors['Last name'] = 'Invalid Text Format'
+    }
+    if (!values['Country / Region']) {
+        errors['Country / Region'] = 'Required'
+    } else if (!/^[A-Za-z]+$/i.test(values['Country / Region'])) {
+        errors['Country / Region'] = 'Invalid Text Format'
+    }
+    if (!values['Town / City']) {
+        errors['Town / City'] = 'Required'
+    } else if (!/^[A-Za-z]+$/i.test(values['Town / City'])) {
+        errors['Town / City'] = 'Invalid Text Format'
+    }
+    if (!values['District']) {
+        errors['District'] = 'Required'
+    } else if (!/^[A-Za-z]+$/i.test(values['District'])) {
+        errors['District'] = 'Invalid Text Format'
+    }
+    if (!values['Street Address']) {
+        errors['Street Address'] = 'Required'
+    } else if (!/^[a-zA-Z0-9\s,'-]*$/i.test(values['Street Address'])) {
+        errors['Street Address'] = 'Invalid Address Format'
+    }
+    if (!values['Postcode / ZIP (optional)']) {
+        errors['Postcode / ZIP (optional)'] = 'Required'
+    } else if (!/^[0-9]*$/i.test(values['Postcode / ZIP (optional)'])) {
+        errors['Postcode / ZIP (optional)'] = 'Only Numbers are accepted'
+    }
+    if (!values['Phone']) {
+        errors['Phone'] = 'Required'
+    } else if (!/^[0-9]*$/i.test(values['Phone'])) {
+        errors['Phone'] = 'Only Numbers are accepted'
+    }
+    if (!values['Email Address']) {
+        errors['Email Address'] = 'Required'
+    } else if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i.test(values['Email Address'])) {
+        errors['Email Address'] = 'Wrong Email Address'
+    }
+    return errors
+}
 function Checkout() {
-    const billingFields = ['First name *', 'Last name *', 'Company name *', 'Country / Region *', 'Street Address *', 'Town / City *', 'District *', 'Postcode / ZIP (optional) *', 'Phone *', 'Email Address *']
+    const billingFields = ['First name', 'Last name', 'Company name', 'Country / Region', 'Street Address', 'Town / City', 'District', 'Postcode / ZIP (optional)', 'Phone', 'Email Address']
     const checkoutList = useSelector(state => state.cartList);
     const cartTotal = useSelector(state => state.cartTotal);
     let total = 0
     cartTotal.map(item => total += item.cost)
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validate
+    })
     return (
         <div>
             <section>
                 <div className="container">
                     <div className="shipping-details">
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <div className="row">
                                 <div className="billing-details">
                                     <h3>Billing Details</h3>
 
                                     <div>
                                         {billingFields.map(name => {
-                                            return <div >
-                                                <label for="firstName" className="form-label billing-fields">{name}</label>
-                                                <input type="text" className="form-control billing-fields" id="firstName" required />
+                                            return <div key={name}>
+                                                <label htmlFor={name} className="form-label billing-fields">{name}{formik.touched[name] && formik.errors[name] ? <div style={{ color: 'red', display: 'inline' }}>*</div> : null}</label>
+                                                {/* in the input field either we can use {...formik.getFieldProps(name)} (or) onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values[name]}*/}
+                                                <input type="text" className="form-control billing-fields" id={name} name={name} {...formik.getFieldProps(name)} />
+                                                {formik.touched[name] && formik.errors[name] ? <div style={{ color: 'red' }}>{formik.errors[name]}</div> : null}
                                             </div>
                                         })}
                                         <div>
-                                            <label for="orderNotes" className="form-label billing-fields">Order notes (optional)</label>
-                                            <textarea type="email" className="form-control billing-fields" rows="5" id="orderNotes" required></textarea>
+                                            <label htmlFor="orderNotes" className="form-label billing-fields">Order notes (optional)</label>
+                                            <textarea type="email" className="form-control billing-fields" rows="5" id="orderNotes"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -60,22 +132,22 @@ function Checkout() {
                                                     <li className="cart-elements">
                                                         <div>
                                                             <input id="BankTransfer" name="paymentMethod" type="radio" />
-                                                            <label for="BankTransfer">Direct Bank Transfer</label>
+                                                            <label htmlFor="BankTransfer">Direct Bank Transfer</label>
                                                         </div>
                                                         <p>
                                                             Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
                                                         </p>
                                                         <div>
                                                             <input id="debitCredit" name="paymentMethod" type="radio" />
-                                                            <label for="debitCredit">Credit / Debit Card </label>
+                                                            <label htmlFor="debitCredit">Credit / Debit Card </label>
                                                         </div>
                                                         <div>
                                                             <input id="cod" name="paymentMethod" type="radio" />
-                                                            <label for="cod">Cash on delivery</label>
+                                                            <label htmlFor="cod">Cash on delivery</label>
                                                         </div>
                                                         <div>
                                                             <input id="paypal" name="paymentMethod" type="radio" />
-                                                            <label for="paypal">PayPal <img src={paypalLogo} alt="" /> What is PayPal?</label>
+                                                            <label htmlFor="paypal">PayPal <img src={paypalLogo} alt="" /> What is PayPal?</label>
                                                         </div>
                                                     </li>
                                                     <li className="info-bottom">
@@ -85,7 +157,7 @@ function Checkout() {
                                             </div>
                                         </div>
                                         <div>
-                                            <button className="btn btn-primary btn-square ">PLACE ORDER</button>
+                                            <button className="btn btn-primary btn-square " type='submit'>PLACE ORDER</button>
                                         </div>
                                     </div>
                                 </div>

@@ -91,3 +91,14 @@
 .loginSignup:hover{
     color: var(--primary);
 }
+.search-dropdown {
+  position: absolute;
+  left: 351px;
+  text-align: left;
+  padding-left: 10px;
+  top: 108px;
+  width: 590px;
+  background-color: white;
+  cursor: pointer;
+  z-index: 5;
+}

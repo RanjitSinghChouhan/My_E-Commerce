@@ -4,8 +4,8 @@ import MainCart from '../../../main-body/home/shopping cart/cart-main-banner/Mai
 function SignUp() {
     return (
         <div>
-            <MainCart name='Sign Up' />
-            <div className="modal theme-modal" id="signup" tabindex="-1" aria-labelledby="orderThankyouLabel" aria-hidden="true">
+            <MainCart name='LogIn/Sign Up' />
+            <div className="modal theme-modal" id="signup">
                 <div className="modal-content">
                     <div className="modal-body">
                         <div className="login-head">

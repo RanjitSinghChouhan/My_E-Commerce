@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, PRODUCT_LIST, REMOVE_CART_PRODUCT } from "./productTypes";
+import { ADD_TO_CART, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, PRODUCT_LIST, REMOVE_CART_PRODUCT, SEARCH } from "./productTypes";
 
 
 const initialState = {
@@ -12,6 +12,10 @@ const productsReducer = (state = initialState, action) => {
     let subtotal = 0;
     state.cartList.map(item => subtotal += item.price);
     switch (action.type) {
+        case SEARCH: return {
+            ...state,
+            products: action.payload.filter(item => item.name.toLowerCase().search(String(action.item)) !== -1)
+        }
         case PRODUCT_LIST: return {
             ...state,
             products: action.payload

@@ -1,9 +1,10 @@
-import { ADD_TO_CART, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, INCREASE_QUANTITY, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT } from "./productTypes";
+import { ADD_TO_CART, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, INCREASE_QUANTITY, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, SEARCH } from "./productTypes";
 
-export const loadProductList = () => {
+export const loadProductList = (item = null) => {
     return {
-        type: PRODUCT_LIST,
-        payload: PRODUCTS_LIST
+        type: item ? SEARCH : PRODUCT_LIST,
+        payload: PRODUCTS_LIST,
+        item: item
     }
 }
 

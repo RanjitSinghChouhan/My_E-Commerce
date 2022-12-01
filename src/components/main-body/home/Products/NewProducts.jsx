@@ -15,7 +15,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
     const perPageArr = [3, 6, 9, 12]
     useEffect(() => {
         loadProductsList()
-    })
+    }, [loadProductsList])
     const handlePageClick = ({ selected: selectedPage }) => {
         setCurrentPage(selectedPage)
     }
@@ -37,6 +37,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                     <button className="btn">COMPRA AHORA <FontAwesomeIcon icon={faAngleRight} /></button>
                 </div>
             </div>
+            <h1 style={{ marginTop: '50px', marginBottom: '50px' }}>PRODUCTS LIST</h1>
             <div className="shop-product-list">
 
                 {paginatedProductList.map((product, index) => {
@@ -71,7 +72,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                     </div>
                 })}
             </div>
-            <div className='pagination'>
+            {paginatedProductList.length === 0 ? <h3>No Searched Product Available</h3> : (<><div className='pagination'>
                 <div>
                     <ReactPaginate
                         breakLabel="..."
@@ -88,7 +89,7 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                     <select data-tip="Number of Products Per Page" onChange={e => handlePerPageSelect(e.target.value)}>{perPageArr.map((perpage, index) => { return <option key={index} value={perpage}>{perpage}</option> })}</select>
                 </div>
             </div>
-            <ReactTooltip />
+                <ReactTooltip /></>)}
         </div>
     )
 }

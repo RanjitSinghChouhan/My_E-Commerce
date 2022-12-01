@@ -49,6 +49,7 @@
 .shop-product-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .shop-product-wrap{
     position: relative;

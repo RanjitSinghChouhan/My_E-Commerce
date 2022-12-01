@@ -30,6 +30,7 @@ img{
 .breadcrumbs-wrapper .breadcrumb a,
 .breadcrumb-item.active {
     color: var(--black);
+    text-decoration: none;
 }
 .breadcrumbs-wrapper .breadcrumb a:hover {
     color: var(--footer-text);
@@ -41,10 +42,8 @@ img{
     top: 1px;
     color: var(--black);
     position: relative;
-    
     display: inline-block;
     content: "//";
-    vertical-align: -0.125em;
     background-size: 0.8rem 0.8rem;
     width: 30px;
 }

@@ -16,6 +16,11 @@ function SecondHeader() {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(loadProductList(term))
+        window.scroll({
+            top: document.body.offsetHeight,
+            left: 0,
+            behavior: 'smooth',
+        });
     }
     return (
         <div>

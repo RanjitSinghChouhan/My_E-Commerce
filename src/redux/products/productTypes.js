@@ -29,7 +29,7 @@ export const PRODUCTS_LIST = [
 export const CART_TOTALS = [
     { id: 1, name: 'Sub-Total', cost: 0 },
     { id: 2, name: 'Shipping', cost: 0 },
-    { id: 3, name: 'Tax', cost: 0 }
+    { id: 3, name: 'Tax (10%)', cost: 0 }
 ]
 
 export const PRODUCT_LIST = 'PRODUCT_LIST';
@@ -40,3 +40,10 @@ export const INCREASE_QUANTITY = 'INCREASE_QUANTITY'
 export const DECREASE_QUANTITY = 'DECREASE_QUANTITY'
 export const CART_TOTAL = 'CART_TOTAL'
 export const SEARCH = 'SEARCH'
+export const LOGIN_USER = 'LOGIN_USER'
+export const LOADING = 'LOADING'
+export const LOADING_SUCCESS = 'LOADING_SUCCESS'
+export const LOADING_FAILED = 'LOADING_FAILED'
+export const LOGGEDIN = 'LOGGEDIN'
+export const LOGGED_OUT = 'LOGGED_OUT'
+export const USER = 'USER'

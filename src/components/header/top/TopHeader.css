@@ -22,13 +22,8 @@
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
-}
-.container1{
-    margin-left: 180px;
-    
-}
-.container2{
-    margin-right: 180px;
+    padding-right: 180px;
+    padding-left: 180px;
 }
 .top-head-bar .top-selectbox{
     display: flex;

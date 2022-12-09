@@ -5,22 +5,45 @@ import { faAngleRight, faShoppingCart, faStar, faStarHalf } from '@fortawesome/f
 import './NewProducts.css';
 import ReactTooltip from 'react-tooltip';
 import { connect } from 'react-redux';
-import { loadAddToCart, loadProductList } from '../../../../redux/products/productsAction';
+import { addToUserCartApi, loadAddToCart, loadProductList } from '../../../../redux/products/productsAction';
 import ReactPaginate from 'react-paginate';
+import { Snackbar, Alert } from '@mui/material';
 
 
-function NewProducts({ productList, loadProductsList, loadAddToCart }) {
+function NewProducts({ productList, loadProductsList, loadAddToCart, addToUserCartApi, userData }) {
     const [currentPage, setCurrentPage] = useState(0);
     const [PER_PAGE, setPerPage] = useState(3);
+    const [open, setOpen] = useState(false);
+    const [productName, setProductName] = useState('');
     const perPageArr = [3, 6, 9, 12]
+    const [errorMsg, setErrorMsg] = useState('')
     useEffect(() => {
         loadProductsList()
     }, [loadProductsList])
     const handlePageClick = ({ selected: selectedPage }) => {
         setCurrentPage(selectedPage)
     }
-    const handlePerPageSelect = (e) => {
-        setPerPage(e)
+    const handlePerPageSelect = (value) => {
+        setPerPage(value)
+    }
+    const handleClose = () => {
+        setOpen(false)
+    }
+    const handleAddToCart = async (product) => {
+
+        var form_data = new FormData();
+        form_data.append('token', localStorage.getItem("token"))
+        form_data.append('product_id', product.id)
+        form_data.append('qty', 1)
+        addToUserCartApi(form_data).then(response => {
+            loadAddToCart(product.id);
+            setProductName(product.name);
+            setOpen(true);
+        }).catch(error => {
+            setErrorMsg(error);
+            setOpen(true);
+        })
+
     }
     const offset = currentPage * PER_PAGE;
     const paginatedProductList = productList.slice(offset, offset + parseInt(PER_PAGE));
@@ -39,7 +62,6 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
             </div>
             <h1 style={{ marginTop: '50px', marginBottom: '50px' }}>PRODUCTS LIST</h1>
             <div className="shop-product-list">
-
                 {paginatedProductList.map((product, index) => {
                     return <div className="shop-product-wrap" key={index}>
                         <div className="img">
@@ -64,30 +86,40 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
                                     <FontAwesomeIcon icon={faStarHalf} />
                                 </div>
                             </div>
-                            <button onClick={() => loadAddToCart(product.id)} className="icon-bag" data-tip="Add to Cart">
+                            <button onClick={() => handleAddToCart(product)} className="icon-bag" data-tip="Add to Cart">
                                 <FontAwesomeIcon icon={faShoppingCart} />
                             </button>
+                            {!errorMsg ? <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1000} onClose={handleClose}>
+                                <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                    {productName} is Successfully Added to the Cart!
+                                </Alert>
+                            </Snackbar> : <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1000} onClose={handleClose}>
+                                <Alert variant="filled" onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                                    {errorMsg}
+                                </Alert>
+                            </Snackbar>}
+
                         </div>
                         <ReactTooltip />
                     </div>
                 })}
             </div>
             {paginatedProductList.length === 0 ? <h3>No Searched Product Available</h3> : (<><div className='pagination'>
-                <div>
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel="Next"
-                        onPageChange={handlePageClick}
-                        pageRangeDisplayed={2}
-                        pageCount={pageCount}
-                        previousLabel="Previous"
-                        renderOnZeroPageCount={null}
-                        className='react_paginate'
-                    />
-                </div>
-                <div>
-                    <select data-tip="Number of Products Per Page" onChange={e => handlePerPageSelect(e.target.value)}>{perPageArr.map((perpage, index) => { return <option key={index} value={perpage}>{perpage}</option> })}</select>
-                </div>
+
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="Next"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={2}
+                    pageCount={pageCount}
+                    previousLabel="Previous"
+                    renderOnZeroPageCount={null}
+                    className='react_paginate'
+                />
+
+
+                <select data-tip="Number of Products Per Page" onChange={e => handlePerPageSelect(e.target.value)}>{perPageArr.map((perpage, index) => { return <option key={index} value={perpage}>{perpage}</option> })}</select>
+
             </div>
                 <ReactTooltip /></>)}
         </div>
@@ -96,14 +128,16 @@ function NewProducts({ productList, loadProductsList, loadAddToCart }) {
 
 const mapStateToProps = state => {
     return {
-        productList: state.products
+        productList: state.products,
+        userData: state.userData
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         loadProductsList: () => dispatch(loadProductList()),
-        loadAddToCart: (id) => dispatch(loadAddToCart(id))
+        loadAddToCart: (id) => dispatch(loadAddToCart(id)),
+        addToUserCartApi: (data) => dispatch(addToUserCartApi(data))
     }
 }
 

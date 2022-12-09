@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import '../Cart.css'
 import paypalLogo from '../../../../../assets/images/paypal_logo.png'
 import { useFormik } from 'formik';
+import { Snackbar, Alert } from '@mui/material';
 const initialValues = {
     'First name': '',
     'Last name': '',
@@ -15,9 +16,6 @@ const initialValues = {
     'Phone': '',
     'Email Address': ''
 };
-const onSubmit = values => {
-    alert(`Billing Details are successfully submitted as First name=${values['First name']}, Last name=${values['Last name']}, Company name=${values['Company name']}, Country / Region=${values['Country / Region']}, Street Address=${values['Street Address']}, Town / City=${values['Town / City']}, District=${values['District']}, Postcode / ZIP (optional)=${values['Postcode / ZIP (optional)']}, Phone=${values['Phone']}, Email Address=${values['Email Address']}`)
-}
 const validate = values => {
     let errors = {};
     if (!values['First name']) {
@@ -71,11 +69,20 @@ function Checkout() {
     const billingFields = ['First name', 'Last name', 'Company name', 'Country / Region', 'Street Address', 'Town / City', 'District', 'Postcode / ZIP (optional)', 'Phone', 'Email Address']
     const checkoutList = useSelector(state => state.cartList);
     const cartTotal = useSelector(state => state.cartTotal);
+    const [open, setOpen] = useState(false);
+    const [firstName, setFirstName] = useState('')
     let total = 0
     cartTotal.map(item => total += item.cost)
+    const handleClose = () => {
+        setOpen(false)
+    }
     const formik = useFormik({
         initialValues,
-        onSubmit,
+        onSubmit: values => {
+            setOpen(true)
+            setFirstName(values['First name'] + ' ' + values['Last name'])
+            // alert(`Billing Details are successfully submitted as First name=${values['First name']}, Last name=${values['Last name']}, Company name=${values['Company name']}, Country / Region=${values['Country / Region']}, Street Address=${values['Street Address']}, Town / City=${values['Town / City']}, District=${values['District']}, Postcode / ZIP (optional)=${values['Postcode / ZIP (optional)']}, Phone=${values['Phone']}, Email Address=${values['Email Address']}`)
+        },
         validate
     })
     return (
@@ -87,7 +94,6 @@ function Checkout() {
                             <div className="row">
                                 <div className="billing-details">
                                     <h3>Billing Details</h3>
-
                                     <div>
                                         {billingFields.map(name => {
                                             return <div key={name}>
@@ -142,7 +148,7 @@ function Checkout() {
                                                             <label htmlFor="debitCredit">Credit / Debit Card </label>
                                                         </div>
                                                         <div>
-                                                            <input id="cod" name="paymentMethod" type="radio" />
+                                                            <input id="cod" name="paymentMethod" type="radio" checked />
                                                             <label htmlFor="cod">Cash on delivery</label>
                                                         </div>
                                                         <div>
@@ -158,6 +164,11 @@ function Checkout() {
                                         </div>
                                         <div>
                                             <button className="btn btn-primary btn-square " type='submit'>PLACE ORDER</button>
+                                            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+                                                <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                                    Billing Details of {firstName} are successfully submitted!
+                                                </Alert>
+                                            </Snackbar>
                                         </div>
                                     </div>
                                 </div>

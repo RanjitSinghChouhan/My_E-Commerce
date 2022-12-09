@@ -1,10 +1,16 @@
-import { ADD_TO_CART, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, PRODUCT_LIST, REMOVE_CART_PRODUCT, SEARCH } from "./productTypes";
+import { ADD_TO_CART, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, SEARCH, USER } from "./productTypes";
 
 
 const initialState = {
     products: [],
     cartList: [],
-    cartTotal: []
+    cartTotal: [],
+    loading: false,
+    isLoggedIn: false,
+    userData: {
+        details: {},
+        cartList: []
+    }
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -22,11 +28,15 @@ const productsReducer = (state = initialState, action) => {
         }
         case ADD_TO_CART:
             const product = action.list.find(product => product.id === action.payload)
-            alert(`${product.name} is Successfully Added to cart`)
+            // alert(`${product.name} is Successfully Added to cart`)
             product.quantity = 1
             return {
                 ...state,
-                cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product]
+                cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product],
+                userData: {
+                    ...state.userData,
+                    cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product]
+                }
             }
         case REMOVE_CART_PRODUCT:
             return {
@@ -34,8 +44,7 @@ const productsReducer = (state = initialState, action) => {
                 cartList: state.cartList.filter(product => product.id !== action.payload)
             }
         case INCREASE_QUANTITY:
-            const prdct = state.cartList.find(product => product.id === action.payload)
-            prdct.quantity = prdct.quantity + 1
+            state.cartList.find(product => product.id === action.payload).quantity++
             return {
                 ...state,
                 cartList: [...state.cartList]
@@ -51,12 +60,40 @@ const productsReducer = (state = initialState, action) => {
             let subtotal = 0;
             state.cartList.map(item => subtotal += item.price * item.quantity)
             action.payload[0].cost = subtotal
-            action.payload[1].cost = state.cartList.length ? 40 : 0
+            action.payload[1].cost = (state.cartList.length && subtotal <= 500) ? 40 : 0
             action.payload[2].cost = subtotal * 0.1
             return {
                 ...state,
                 cartTotal: action.payload
             }
+        case LOADING: return {
+            ...state,
+            loading: true
+        }
+        case LOADING_SUCCESS: return {
+            ...state,
+            loading: false
+        }
+        case LOADING_FAILED: return {
+            ...state,
+            loading: false
+        }
+        case LOGGEDIN: return {
+            ...state,
+            isLoggedIn: true
+        }
+        case LOGGED_OUT: return {
+            ...state,
+            cartList: [],
+            isLoggedIn: false
+        }
+        case USER: return {
+            ...state,
+            userData: {
+                ...state.userData,
+                details: action.payload
+            }
+        }
         default: return state
     }
 }

@@ -6,10 +6,10 @@ function TopHeader() {
     const currency = ['USD', 'DZA', 'CAD', 'XCD'];
     return (
         <div className="top-head-bar">
-            <div className="container1">
+            <div>
                 World Wide Completely Free Returns and Free Shipping
             </div>
-            <div className="top-selectbox container2">
+            <div className="top-selectbox">
                 <select className="small">
                     {languages.map((lan, index) => { return <option value={lan} key={index}>{lan}</option> })}
                 </select>

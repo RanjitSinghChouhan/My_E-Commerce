@@ -313,18 +313,19 @@
         width: 650px;
     }
 }
-@media (min-width: 992px){
+@media (min-width: 992.1px){
     .navbar-toggler {
         display: none;
     }
 }
-@media (max-width: 991.99px) {
+@media (max-width: 992px) {
     .header-wrap .category-form {
         display: none;
     }
     .navbar-collapse{
         list-style: none;
         border-top: 1px solid var(--border-color);
+        display: none;
     }
     .navbar-wrap .nav-link{
         padding: 0.5rem 1rem;
@@ -334,5 +335,6 @@
         border: none;
         margin: 0;
         margin-left: auto;
+        display: none;
     }
 }

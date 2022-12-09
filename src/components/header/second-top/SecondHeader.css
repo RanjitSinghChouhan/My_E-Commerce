@@ -22,10 +22,14 @@
     justify-content: space-between;
 }
 .logo{
-    margin-left: 180px;
+    margin-left: 13.5%;
+}
+.logo a img{
+    width: 100%;
+    height: auto;
 }
 .right-login{
-    margin-right: 180px;
+    margin-right: 13.5%;
     display: flex;
     justify-content: space-between;
 }
@@ -34,7 +38,7 @@
     align-items: center;
     flex-shrink: 0;
     background-color: var(--white);
-    width: 600px;
+    width: 40vw;
     margin: 0 1.5rem;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.33);      
 }
@@ -60,10 +64,10 @@
     padding: 0.7rem 1rem;
 }
 .right-login .shop-btns{
-    margin-left: 5px;
+    margin-left: 0.01%;
 }
 .right-login .shop-btns a{
-    font-size: 1rem;
+    font-size: 0.7rem;
     color: var(--black);
 }
 .right-login .shop-btns a:hover{
@@ -75,7 +79,6 @@
 .bs-links {
     display: flex;
     margin: 0;
-    margin-right: 5px;
 }
 .bs-links a{
     color: var(--black);
@@ -89,6 +92,7 @@
 .loginSignup:hover{
     color: var(--primary);
     cursor: pointer;
+    font-size: 0.8rem;
 }
 .search-dropdown {
   position: absolute;
@@ -101,4 +105,14 @@
   cursor: pointer;
   z-index: 5;
   box-shadow: 0px 0px 8px 0px rgba(61, 16, 16, 0.33); 
+}
+
+@media(max-width: 375px){
+    .right-login .shop-btns a:not(:last-child){
+        margin-right: 0.2rem;
+    }
+    .right-login .shop-btns a{
+        font-size: 0.5rem;
+       
+    }
 }

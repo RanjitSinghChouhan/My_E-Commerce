@@ -16,24 +16,22 @@
     --transition: all 0.3s ease-in-out;
 }
 .top-head-bar{
-    font-size: 14px;
+    font-size: 0.7rem;
     text-align: center;
     background: var(--light-gray);
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
-    padding-right: 180px;
-    padding-left: 180px;
+    padding-right: 13.5%;;
+    padding-left: 13.5%;;
 }
 .top-head-bar .top-selectbox{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-top: 0.5rem;
     background: transparent;
     border-color: transparent;
     padding-left: 0;
-    padding-right: 20px;
     font-weight: 600;
     color: var(--black);
 }
@@ -41,9 +39,19 @@
     height: 6px;
     width: 6px;
     margin-top: -15px;
-    right: 7px;
 }
 .small {
     border: none;
     background: var(--light-gray);
+    font-size: 0.7rem;
+    padding-top: .1rem;
+}
+
+@media(max-width: 514px){
+    .top-head-bar {
+        font-size: 0.5rem;
+    }
+    .small {
+        font-size: 0.5rem;
+    }
 }

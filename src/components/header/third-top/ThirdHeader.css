@@ -67,8 +67,8 @@
 .navbar-wrap{
     background-color: var(--white);
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.33);
-    margin-left: 180px;
-    margin-right: 180px;
+    margin-left: 13.5%;
+    margin-right: 13.5%;
 }
 .navbar-wrap .navbar{
     display: flex;

@@ -1,5 +1,5 @@
 import { apiClient } from "../../services/apiConfig";
-import { ADD_TO_CART, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, SEARCH, USER } from "./productTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER, WISHLIST } from "./productTypes";
 import { PATH } from './../../services/apiConstants'
 
 
@@ -19,9 +19,24 @@ export const loadAddToCart = (id) => {
     }
 }
 
+export const loadAddToWishlist = (id) => {
+    return {
+        type: ADD_TO_WISHLIST,
+        list: PRODUCTS_LIST,
+        payload: id
+    }
+}
+
 export const removeCartProduct = (id) => {
     return {
         type: REMOVE_CART_PRODUCT,
+        payload: id
+    }
+}
+
+export const removeWishlistProduct = (id) => {
+    return {
+        type: REMOVE_FROM_WISHLIST,
         payload: id
     }
 }

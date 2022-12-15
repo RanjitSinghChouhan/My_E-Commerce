@@ -2,3 +2,8 @@
   text-align: center;
   font-size: 14px;
 }
+@media(max-width: 350px){
+  .App {
+    margin-right: -12px;
+  }
+}

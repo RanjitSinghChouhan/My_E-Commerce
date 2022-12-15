@@ -55,3 +55,11 @@
         font-size: 0.5rem;
     }
 }
+@media(max-width: 350px){
+    .top-head-bar {
+        font-size: 0.3rem;
+    }
+    .small {
+        font-size: 0.3rem;
+    }
+}

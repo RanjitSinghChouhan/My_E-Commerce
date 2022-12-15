@@ -9,16 +9,7 @@ const contact = lazy(() => import('../components/main-body/contact/Contact'))
 const cart = lazy(() => import('../components/main-body/home/shopping cart/Cart'))
 const checkout = lazy(() => import('../components/main-body/home/shopping cart/checkout/Checkout'))
 const cartTable = lazy(() => import('../components/main-body/home/shopping cart/cart-table/CartTable'))
-{/* <Route path='/' element={<Home />} />
-                    <Route path='cart' element={<Cart />} >
-                        <Route index element={<CartTable />} />
-                        <Route path="checkout" element={<Checkout />} />
-                    </Route>
-                    <Route path='about' element={<About />} />
-                    <Route path='blog' element={<Blog />} />
-                    <Route path='contact' element={<Contact />} />
-                    <Route path='signup' element={<SignUp />} />
-                    <Route path='signin' element={<Login />} /> */}
+const wishList = lazy(() => import('../components/header/second-top/wishlist/WishList'))
 
 export const routes = [
     {
@@ -58,5 +49,9 @@ export const routes = [
         },
         ]
     },
+    {
+        path: 'wishlist',
+        element: wishList
+    }
 
 ]

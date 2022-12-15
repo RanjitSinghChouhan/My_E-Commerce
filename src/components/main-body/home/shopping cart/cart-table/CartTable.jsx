@@ -34,7 +34,7 @@ function CartTable() {
                                     </div>
                                 </td>
                                 <td>
-                                    <div className="item-product">
+                                    <div>
                                         <span><strong>{product.name}</strong></span>
                                     </div>
                                 </td>
@@ -68,7 +68,7 @@ function CartTable() {
                         <button className="btn btn-dark">Apply Coupon</button>
                     </div>
                 </div>
-                <div>
+                <div className="cart-totals-parent">
                     <div className="cart-totals">
                         <div className="order-list">
                             <ul className="list-unstyled">

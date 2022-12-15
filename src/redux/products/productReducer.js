@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, SEARCH, USER } from "./productTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER } from "./productTypes";
 
 
 const initialState = {
@@ -10,7 +10,8 @@ const initialState = {
     userData: {
         details: {},
         cartList: []
-    }
+    },
+    wishList: []
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -38,10 +39,27 @@ const productsReducer = (state = initialState, action) => {
                     cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product]
                 }
             }
+        case ADD_TO_WISHLIST:
+            console.log(action.list, 'action.list');
+            const productToWishlist = action.list.find(product => product.id === action.payload)
+            // alert(`${product.name} is Successfully Added to cart`)
+            return {
+                ...state,
+                wishList: state.wishList.includes(productToWishlist) ? [...state.wishList] : [...state.wishList, productToWishlist],
+                // userData: {
+                //     ...state.userData,
+                //     cartList: state.cartList.includes(productToWishlist) ? [...state.cartList] : [...state.cartList, product]
+                // }
+            }
         case REMOVE_CART_PRODUCT:
             return {
                 ...state,
                 cartList: state.cartList.filter(product => product.id !== action.payload)
+            }
+        case REMOVE_FROM_WISHLIST:
+            return {
+                ...state,
+                wishList: state.wishList.filter(product => product.id !== action.payload)
             }
         case INCREASE_QUANTITY:
             state.cartList.find(product => product.id === action.payload).quantity++

@@ -101,7 +101,7 @@ function SecondHeader() {
                             </Snackbar>
                             |
                             <div className="shop-btns">
-                                <a href="wishlist.html"><FontAwesomeIcon icon={faHeart} /></a>
+                                <Link to='wishlist'><a href="#" data-tip='Go To Wish List'><FontAwesomeIcon icon={faHeart} /></a></Link>
                                 <Link to='cart'><a href="#" data-trigger="#shop_cart" data-tip='Go To Shopping Cart'><FontAwesomeIcon icon={faShoppingCart} /></a></Link>
                                 <Outlet />
                             </div>

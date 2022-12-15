@@ -113,6 +113,22 @@
     }
     .right-login .shop-btns a{
         font-size: 0.5rem;
-       
+    }
+}
+
+@media(max-width: 350px){
+    .right-login .shop-btns a{
+        margin-right: 0rem;
+        font-size: 0.4rem;
+    }
+    .bs-links, .loginSignup{
+        font-size: 0.5rem;
+    }
+    .logo {
+        margin-left: 8.5%;
+    }
+    .logo a img{
+        width: 70%;
+        height: auto;
     }
 }

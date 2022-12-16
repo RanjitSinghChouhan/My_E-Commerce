@@ -1,5 +1,5 @@
 import { apiClient } from "../../services/apiConfig";
-import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER, WISHLIST } from "./productTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER, WISHLIST } from "./productTypes";
 import { PATH } from './../../services/apiConstants'
 
 
@@ -7,6 +7,14 @@ export const loadProductList = (item = null) => {
     return {
         type: item ? SEARCH : PRODUCT_LIST,
         payload: PRODUCTS_LIST,
+        item: item
+    }
+}
+
+export const loadFetchedProductList = (item = null) => {
+    return {
+        type: FETCHED_PRODUCT_LIST,
+        payload: FETCHED_PRODUCT_LIST,
         item: item
     }
 }
@@ -92,12 +100,6 @@ export const loggedOut = () => {
     }
 }
 
-export const userInfo = (data) => {
-    return {
-        type: USER,
-        payload: data
-    }
-}
 
 export const userRegistration = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -126,7 +128,6 @@ export const loginUser = (data) => (dispatch) => {
         }).then((response) => {
             dispatch(loadingApiSuccess())
             dispatch(loggedIn())
-            dispatch(userInfo(response.data))
             resolve(response.data);
         }).catch((error) => {
             dispatch(loadingApiFailed())
@@ -145,7 +146,6 @@ export const logoutUser = (data) => (dispatch) => {
         }).then(response => {
             dispatch(loadingApiSuccess())
             dispatch(loggedOut())
-            dispatch(userInfo(''))
             resolve(response.data)
         }).catch(error => {
             dispatch(loadingApiFailed())
@@ -165,6 +165,24 @@ export const addToUserCartApi = (data) => (dispatch) => {
         }).then(response => {
             dispatch(loadingApiSuccess())
             // dispatch(loadAddToCart(data))
+            resolve(response)
+        }).catch(error => {
+            dispatch(loadingApiFailed())
+            reject(error)
+        })
+    })
+}
+
+export const fetchProductList = (data) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        dispatch(loadingApi())
+        apiClient({
+            method: 'GET',
+            url: PATH.auth.products,
+            data
+        }).then(response => {
+            dispatch(loadingApiSuccess());
+            dispatch(loadFetchedProductList(response.data.data))
             resolve(response)
         }).catch(error => {
             dispatch(loadingApiFailed())

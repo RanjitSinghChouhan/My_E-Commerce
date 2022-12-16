@@ -1,27 +1,23 @@
+import { faHeart, faShoppingCart, faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useRef, useState } from 'react'
-import banner1 from '../../../../assets/images/banner_bg_1.png'
-import { faAngleRight, faHeart, faShoppingCart, faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
-import './NewProducts.css';
-import ReactTooltip from 'react-tooltip';
-import { connect, useDispatch } from 'react-redux';
-import { addToUserCartApi, fetchProductList, loadAddToCart, loadAddToWishlist, loadFetchedProductList, loadProductList } from '../../../../redux/products/productsAction';
+import { Alert, Snackbar } from '@mui/material'
+import { padding } from '@mui/system';
+import React, { useRef, useState } from 'react'
 import ReactPaginate from 'react-paginate';
-import { Snackbar, Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
+import { addToUserCartApi, loadAddToCart, loadAddToWishlist } from '../../../../../redux/products/productsAction';
 
-function NewProducts({ productList, loadProductsList, loadAddToCart, addToUserCartApi, loadAddToWishlist, fetchProductList }) {
+function ProductList() {
     const [currentPage, setCurrentPage] = useState(0);
     const [PER_PAGE, setPerPage] = useState(3);
     const [open, setOpen] = useState(false);
     const [productName, setProductName] = useState('');
-    const perPageArr = [3, 6, 9, 12]
+    const perPageArr = [5, 10, 20, 50]
     const [errorMsg, setErrorMsg] = useState('');
     const isAddedToWishList = useRef(false);
-    const navigate = useNavigate();
-    useEffect(() => {
-        loadProductsList()
-    }, [loadProductsList])
+    const productList = useSelector(state => state.fetchedProductsList);
+    const dispatch = useDispatch()
     const handlePageClick = ({ selected: selectedPage }) => {
         setCurrentPage(selectedPage)
     }
@@ -36,9 +32,9 @@ function NewProducts({ productList, loadProductsList, loadAddToCart, addToUserCa
         form_data.append('token', localStorage.getItem("token"))
         form_data.append('product_id', product.id)
         form_data.append('qty', 1)
-        addToUserCartApi(form_data).then(response => {
-            loadAddToCart(product.id);
-            setProductName(product.name);
+        dispatch(addToUserCartApi(form_data)).then(response => {
+            dispatch(loadAddToCart(product.product_id || product.id));
+            setProductName(product.title || product.name);
             setOpen(true);
             isAddedToWishList.current = false;
         }).catch(error => {
@@ -48,50 +44,31 @@ function NewProducts({ productList, loadProductsList, loadAddToCart, addToUserCa
     }
     const handleAddToWishlist = (product) => {
         isAddedToWishList.current = true;
-        loadAddToWishlist(product.id);
-        setProductName(product.name);
+        dispatch(loadAddToWishlist(product.product_id || product.id));
+        setProductName(product.title || product.name);
         setOpen(true);
     };
-    const handleImageClick = async () => {
-        var form_data = new FormData();
-        form_data.append('token', localStorage.getItem("token"))
-        fetchProductList(form_data).then(response => {
-            navigate('/productslist')
-        }).catch(error => { })
-    }
     const offset = currentPage * PER_PAGE;
     const paginatedProductList = productList.slice(offset, offset + parseInt(PER_PAGE));
-    const pageCount = Math.ceil(productList.length / PER_PAGE)
+    const pageCount = productList.length ? Math.ceil(productList.length / PER_PAGE) : 1;
     return (
         <div className='new-products-container'>
-            <div className="banner-highlights banner-highlights-img-1">
-                <div className="img">
-                    <img src={banner1} alt="" />
-                </div>
-                <div className="text-content">
-                    <h2>New Products</h2>
-                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form o</p>
-                    <button className="btn">COMPRA AHORA <FontAwesomeIcon icon={faAngleRight} /></button>
-                </div>
-            </div>
-            <h1 style={{ marginTop: '50px', marginBottom: '50px' }}>PRODUCTS LIST</h1>
+            <h1 style={{ marginBottom: '4%', height: '50px', boxShadow: '0px 0px 4px 0px rgba(175, 105, 105, 0.47)' }}>Products List</h1>
             <div className="shop-product-list">
-                {paginatedProductList.map((product, index) => {
-                    return <div className="shop-product-wrap" key={index}>
-                        <div className="img">
-                            <button data-tip='Click on this image to see Full Products List' onClick={handleImageClick}>
-                                <img src={product.image} className="non-over" alt="" />
-                                <img src={product.over} className="img-over" alt="" />
+                {paginatedProductList.map((product) => {
+                    return <div className="shop-product-wrap" key={product.product_id || product.id}>
+                        <div className="api-img">
+                            <button>
+                                <img src={product.image} alt="" />
                             </button>
                         </div>
-                        <ReactTooltip />
                         <h3>
-                            <a href="product-details.html">{product.name}</a>
+                            <a href="product-details.html">{product.title || product.name}</a>
                         </h3>
                         <div className="content">
                             <div>
                                 <div className="price">
-                                    <span className="deal-price">${product.price}</span> - <span className="discount">${product.actualPrice}</span>
+                                    <span className="deal-price">${product.price}</span> - <span className="discount">${product.actualPrice || product.price * 1.5}</span>
                                 </div>
                                 <div className="rating">
                                     <FontAwesomeIcon icon={faStar} />
@@ -129,35 +106,15 @@ function NewProducts({ productList, loadProductsList, loadAddToCart, addToUserCa
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={2}
                     pageCount={pageCount}
-                    previousLabel="Previous"
+                    previousLabel="Prev"
                     renderOnZeroPageCount={null}
                     className='react_paginate'
                 />
-
-
                 <select data-tip="Number of Products Per Page" onChange={e => handlePerPageSelect(e.target.value)}>{perPageArr.map((perpage, index) => { return <option key={index} value={perpage}>{perpage}</option> })}</select>
-
             </div>
                 <ReactTooltip /></>)}
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        productList: state.products,
-        userData: state.userData
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        loadProductsList: () => dispatch(loadProductList()),
-        loadAddToCart: (id) => dispatch(loadAddToCart(id)),
-        addToUserCartApi: (data) => dispatch(addToUserCartApi(data)),
-        loadAddToWishlist: (id) => dispatch(loadAddToWishlist(id)),
-        fetchProductList: (data) => dispatch(fetchProductList(data))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewProducts)
+export default ProductList

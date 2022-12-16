@@ -35,22 +35,22 @@ function CartTable() {
                                 </td>
                                 <td>
                                     <div>
-                                        <span><strong>{product.name}</strong></span>
+                                        <span><strong>{product.name || product.title}</strong></span>
                                     </div>
                                 </td>
                                 <td><strong>{product.price}</strong></td>
                                 <td>
                                     <div className="quantity">
-                                        <button onClick={() => dispatch(decreaseQuantity(product.id))} className="minus-btn" type="button" name="button">
+                                        <button onClick={() => dispatch(decreaseQuantity(product.id || product.product_id))} className="minus-btn" type="button" name="button">
                                             <FontAwesomeIcon icon={faMinus} />
                                         </button>
                                         <input type="text" name="name" value={product.quantity} />
-                                        <button onClick={() => dispatch(increaseQuantity(product.id))} className="plus-btn" type="button" name="button">
+                                        <button onClick={() => dispatch(increaseQuantity(product.id || product.product_id))} className="plus-btn" type="button" name="button">
                                             <FontAwesomeIcon icon={faPlus} />
                                         </button>
                                     </div>
                                 </td>
-                                <td className="text-nowrap"><strong>{product.price * product.quantity}</strong> <button onClick={() => dispatch(removeCartProduct(product.id))} className="cart-delete"><FontAwesomeIcon icon={faTrash} /></button></td>
+                                <td className="text-nowrap"><strong>{product.price * product.quantity}</strong> <button onClick={() => dispatch(removeCartProduct(product.id || product.product_id))} className="cart-delete"><FontAwesomeIcon icon={faTrash} /></button></td>
                             </tr>
                         })}
                     </tbody>

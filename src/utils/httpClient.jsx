@@ -8,7 +8,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
     function (response) {
-        const access_token = localStorage.setItem('access_token', JSON.stringify(''));
+        const access_token = localStorage.setItem('token', JSON.stringify(''));
         Object.assign(response.headers, {
             "Content-type": "application/json",
             Accept: "application/json",

@@ -1,10 +1,10 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Alert, Snackbar } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactTooltip from 'react-tooltip';
-import { loadAddToCart, removeWishlistProduct } from '../../../../../redux/products/productsAction';
+import { addToUserCartApi, loadAddToCart, removeWishlistProduct } from '../../../../../redux/products/productsAction';
 
 function WishListTable() {
     const headers = ["", 'Product', 'Price', ""];
@@ -12,10 +12,21 @@ function WishListTable() {
     const [open, setOpen] = useState(false);
     const [productName, setProductName] = useState('');
     const dispatch = useDispatch();
+    const [errorMsg, setErrorMsg] = useState('');
     const handleAddToCart = (product) => {
-        dispatch(loadAddToCart(product.id));
-        setProductName(product.name);
-        setOpen(true)
+        var form_data = new FormData();
+        form_data.append('token', localStorage.getItem("token"))
+        form_data.append('product_id', (product.id || product.product_id))
+        form_data.append('qty', 1)
+        dispatch(addToUserCartApi(form_data)).then(response => {
+            dispatch(loadAddToCart(product.product_id || product.id));
+            setProductName(product.title || product.name);
+            setOpen(true);
+            dispatch(removeWishlistProduct(product.id || product.product_id))
+        }).catch(error => {
+            setErrorMsg(error);
+            setOpen(true);
+        })
     };
     const handleClose = () => {
         setOpen(false)
@@ -39,19 +50,22 @@ function WishListTable() {
                                 </td>
                                 <td>
                                     <div>
-                                        <span><strong>{product.name}</strong></span>
+                                        <span><strong>{product.name || product.title}</strong></span>
                                     </div>
                                 </td>
                                 <td><strong>{product.price}</strong></td>
-                                <td className="text-nowrap"><button className='btn btn-primary add-to-cart-btn' onClick={() => handleAddToCart(product)}>Add To Cart</button> <button className="cart-delete" data-tip='Delete the Product' onClick={() => dispatch(removeWishlistProduct(product.id))}><FontAwesomeIcon icon={faTrash} /></button>
-                                    <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
+                                <td className="text-nowrap"><button className='btn btn-primary add-to-cart-btn' onClick={() => handleAddToCart(product)}>Add To Cart</button> <button className="cart-delete" data-tip='Delete the Product' onClick={() => dispatch(removeWishlistProduct(product.id || product.product_id))}><FontAwesomeIcon icon={faTrash} /></button>
+                                    {!errorMsg ? <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1000} onClose={handleClose}>
                                         <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                                             {productName} is Successfully Added to the Cart!
                                         </Alert>
-                                    </Snackbar>
+                                    </Snackbar> : <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1000} onClose={handleClose}>
+                                        <Alert variant="filled" onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                                            {errorMsg}
+                                        </Alert>
+                                    </Snackbar>}
                                     <ReactTooltip />
                                 </td>
-
                             </tr>
                         })}
                     </tbody>

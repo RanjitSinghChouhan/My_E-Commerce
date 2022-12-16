@@ -10,6 +10,7 @@ const cart = lazy(() => import('../components/main-body/home/shopping cart/Cart'
 const checkout = lazy(() => import('../components/main-body/home/shopping cart/checkout/Checkout'))
 const cartTable = lazy(() => import('../components/main-body/home/shopping cart/cart-table/CartTable'))
 const wishList = lazy(() => import('../components/header/second-top/wishlist/WishList'))
+const productsList = lazy(() => import('../components/main-body/home/Products/product-list/ProductList'))
 
 export const routes = [
     {
@@ -52,6 +53,10 @@ export const routes = [
     {
         path: 'wishlist',
         element: wishList
+    },
+    {
+        path: 'productslist',
+        element: productsList
     }
 
 ]

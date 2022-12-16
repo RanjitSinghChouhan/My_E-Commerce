@@ -121,7 +121,7 @@ function Checkout() {
                                                     </li>
                                                     {checkoutList.map(item => {
                                                         return <li key={item.id}>
-                                                            <span>{item.name} × {item.quantity}</span>
+                                                            <span>{item.name || item.title} × {item.quantity}</span>
                                                             <span className="txt-pink">${item.price * item.quantity}</span>
                                                         </li>
                                                     })}

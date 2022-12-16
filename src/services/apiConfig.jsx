@@ -3,7 +3,6 @@ import { PATH } from './apiConstants';
 
 
 const access_token = localStorage.setItem('token', JSON.stringify(''));
-const refreshToken = localStorage.getItem("refresh_token");
 const defaultHeaders = {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",

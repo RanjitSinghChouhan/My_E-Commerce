@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, DECREASE_QUANTITY, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER } from "./productTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER } from "./productTypes";
 
 
 const initialState = {
@@ -7,11 +7,8 @@ const initialState = {
     cartTotal: [],
     loading: false,
     isLoggedIn: false,
-    userData: {
-        details: {},
-        cartList: []
-    },
-    wishList: []
+    wishList: [],
+    fetchedProductsList: []
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -27,48 +24,44 @@ const productsReducer = (state = initialState, action) => {
             ...state,
             products: action.payload
         }
+        case FETCHED_PRODUCT_LIST:
+            return {
+                ...state,
+                fetchedProductsList: [...state.products, ...action.item]
+            }
         case ADD_TO_CART:
-            const product = action.list.find(product => product.id === action.payload)
+            const product = (action.list.find(product => product.id === action.payload) || state.fetchedProductsList.find(product => product.product_id === action.payload))
             // alert(`${product.name} is Successfully Added to cart`)
             product.quantity = 1
             return {
                 ...state,
-                cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product],
-                userData: {
-                    ...state.userData,
-                    cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product]
-                }
+                cartList: state.cartList.includes(product) ? [...state.cartList] : [...state.cartList, product]
             }
         case ADD_TO_WISHLIST:
-            console.log(action.list, 'action.list');
-            const productToWishlist = action.list.find(product => product.id === action.payload)
+            const productToWishlist = (action.list.find(product => product.id === action.payload) || state.fetchedProductsList.find(product => product.product_id === action.payload))
             // alert(`${product.name} is Successfully Added to cart`)
             return {
                 ...state,
-                wishList: state.wishList.includes(productToWishlist) ? [...state.wishList] : [...state.wishList, productToWishlist],
-                // userData: {
-                //     ...state.userData,
-                //     cartList: state.cartList.includes(productToWishlist) ? [...state.cartList] : [...state.cartList, product]
-                // }
+                wishList: state.wishList.includes(productToWishlist) ? [...state.wishList] : [...state.wishList, productToWishlist]
             }
         case REMOVE_CART_PRODUCT:
             return {
                 ...state,
-                cartList: state.cartList.filter(product => product.id !== action.payload)
+                cartList: state.cartList.filter(product => (product.id || product.product_id) !== action.payload)
             }
         case REMOVE_FROM_WISHLIST:
             return {
                 ...state,
-                wishList: state.wishList.filter(product => product.id !== action.payload)
+                wishList: state.wishList.filter(product => (product.id || product.product_id) !== action.payload)
             }
         case INCREASE_QUANTITY:
-            state.cartList.find(product => product.id === action.payload).quantity++
+            state.cartList.find(product => (product.id || product.product_id) === action.payload).quantity++
             return {
                 ...state,
                 cartList: [...state.cartList]
             }
         case DECREASE_QUANTITY:
-            const prdctDecrease = state.cartList.find(product => product.id === action.payload)
+            const prdctDecrease = state.cartList.find(product => (product.id || product.product_id) === action.payload)
             prdctDecrease.quantity = prdctDecrease.quantity > 1 ? prdctDecrease.quantity - 1 : 1
             return {
                 ...state,
@@ -104,13 +97,6 @@ const productsReducer = (state = initialState, action) => {
             ...state,
             cartList: [],
             isLoggedIn: false
-        }
-        case USER: return {
-            ...state,
-            userData: {
-                ...state.userData,
-                details: action.payload
-            }
         }
         default: return state
     }

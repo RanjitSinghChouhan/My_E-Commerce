@@ -80,9 +80,6 @@ function SecondHeader() {
                                 return searchTerm && name.search(searchTerm) !== -1 && name !== searchTerm
                             }).map(item => { return <div onClick={() => setTerm(item.name.toLowerCase())}>{item.name.toLowerCase()}</div> })}
                         </div>
-                        <div>
-
-                        </div>
                         <div className="right-login">
                             <div className="bs-links">
                                 {!isLoggedIn ? <><Link to='signin'><button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>Login </button></Link>

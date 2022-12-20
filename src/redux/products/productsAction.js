@@ -3,11 +3,12 @@ import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, CART_TOTALS, DECREASE_QUANTIT
 import { PATH } from './../../services/apiConstants'
 
 
-export const loadProductList = (item = null) => {
+export const loadProductList = (item = null, isFetched = false) => {
     return {
         type: item ? SEARCH : PRODUCT_LIST,
         payload: PRODUCTS_LIST,
-        item: item
+        item: item,
+        isFetched: isFetched
     }
 }
 
@@ -15,7 +16,8 @@ export const loadFetchedProductList = (item = null) => {
     return {
         type: FETCHED_PRODUCT_LIST,
         payload: FETCHED_PRODUCT_LIST,
-        item: item
+        item: item,
+        isFetched: true
     }
 }
 
@@ -100,6 +102,12 @@ export const loggedOut = () => {
     }
 }
 
+export const userInfo = (data) => {
+    return {
+        type: USER,
+        payload: data
+    }
+}
 
 export const userRegistration = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -127,6 +135,7 @@ export const loginUser = (data) => (dispatch) => {
             data
         }).then((response) => {
             dispatch(loadingApiSuccess())
+            dispatch(userInfo(response.data))
             dispatch(loggedIn())
             resolve(response.data);
         }).catch((error) => {
@@ -145,6 +154,7 @@ export const logoutUser = (data) => (dispatch) => {
             data
         }).then(response => {
             dispatch(loadingApiSuccess())
+            dispatch(userInfo(''))
             dispatch(loggedOut())
             resolve(response.data)
         }).catch(error => {

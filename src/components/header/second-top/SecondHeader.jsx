@@ -5,7 +5,7 @@ import { faSearchengin } from '@fortawesome/free-brands-svg-icons'
 import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import './SecondHeader.css'
 import ReactTooltip from 'react-tooltip'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadProductList, logoutUser } from '../../../redux/products/productsAction'
 import { Snackbar, Alert } from '@mui/material';
@@ -25,18 +25,25 @@ function SecondHeader() {
     const [errorMsg, setErrorMsg] = useState('')
     const navigate = useNavigate()
     const loadingApi = useSelector(state => state.loading)
+    const location = useLocation()
     const handleClose = () => {
         setOpen(false)
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(loadProductList(term))
+        if (location.pathname === '/productslist') {
+            dispatch(loadProductList(term, true))
+        }
+        else if (location.pathname === '/') {
+            dispatch(loadProductList(term, false))
+        }
         window.scroll({
             top: document.body.offsetHeight,
             left: 0,
             behavior: 'smooth',
         });
     }
+    console.log(userData, 'userData');
     const logoutHandler = () => {
         var form_data = new FormData();
         form_data.append('token', localStorage.getItem("token"))
@@ -76,17 +83,34 @@ function SecondHeader() {
                         <div className='search-dropdown'>
                             {productList.filter(item => {
                                 const searchTerm = term && term.toLowerCase();
-                                const name = item.name.toLowerCase();
+                                const name = (item.title && item.title.toLowerCase()) || (item.name && item.name.toLowerCase());
                                 return searchTerm && name.search(searchTerm) !== -1 && name !== searchTerm
-                            }).map(item => { return <div onClick={() => setTerm(item.name.toLowerCase())}>{item.name.toLowerCase()}</div> })}
+                            }).map(item => { return <div onClick={() => setTerm((item.title && item.title.toLowerCase()) || (item.name && item.name.toLowerCase()))}>{(item.title && item.title.toLowerCase()) || (item.name && item.name.toLowerCase())}</div> })}
                         </div>
                         <div className="right-login">
                             <div className="bs-links">
-                                {!isLoggedIn ? <><Link to='signin'><button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>Login </button></Link>
+                                {!isLoggedIn ? <>
+                                    <Link to='signin'>
+                                        <button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
+                                            Login
+                                        </button>
+                                    </Link>
                                     /
-                                    <Link to='signup'><button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>SignUp </button></Link></> :
-                                    <div style={{ border: 'none', backgroundColor: 'white', display: 'block' }}><div>{userData && userData.details.data && userData.details.data.customer && userData.details.data.customer.name.toUpperCase()}</div>
-                                        <button onClick={logoutHandler} className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>Logout </button></div>
+                                    <Link to='signup'>
+                                        <button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
+                                            SignUp
+                                        </button>
+                                    </Link></> :
+                                    <div style={{ border: 'none', backgroundColor: 'white', display: 'block' }}>
+                                        <Link to='my_account'>
+                                            <div>
+                                                {userData && userData.details.data && userData.details.data.customer && (userData.details.data.customer.name.toUpperCase() || userData.details.data.customer.email)}
+                                            </div>
+                                        </Link>
+                                        <button onClick={logoutHandler} className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
+                                            Logout
+                                        </button>
+                                    </div>
                                 }
                             </div>
                             <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>

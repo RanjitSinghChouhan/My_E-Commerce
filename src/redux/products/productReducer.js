@@ -7,6 +7,10 @@ const initialState = {
     cartTotal: [],
     loading: false,
     isLoggedIn: false,
+    userData: {
+        details: {},
+        cartList: []
+    },
     wishList: [],
     fetchedProductsList: []
 }
@@ -16,18 +20,20 @@ const productsReducer = (state = initialState, action) => {
     let subtotal = 0;
     state.cartList.map(item => subtotal += item.price);
     switch (action.type) {
-        case SEARCH: return {
-            ...state,
-            products: action.payload.filter(item => item.name.toLowerCase().search(String(action.item)) !== -1)
-        }
+        case SEARCH:
+            return {
+                ...state,
+                products: action.isFetched ? state.fetchedProductsList.filter(item => ((item.name && item.name.toLowerCase()) || (item.title && item.title.toLowerCase())).search(String(action.item).toLowerCase()) !== -1) : action.payload.filter(item => item.name.toLowerCase().search(String(action.item).toLowerCase()) !== -1)
+            }
         case PRODUCT_LIST: return {
             ...state,
-            products: action.payload
+            products: action.isFetched ? state.fetchedProductsList : action.payload
         }
         case FETCHED_PRODUCT_LIST:
             return {
                 ...state,
-                fetchedProductsList: [...state.products, ...action.item]
+                fetchedProductsList: [...state.products, ...action.item],
+                products: [...state.products, ...action.item]
             }
         case ADD_TO_CART:
             const product = (action.list.find(product => product.id === action.payload) || state.fetchedProductsList.find(product => product.product_id === action.payload))
@@ -97,6 +103,13 @@ const productsReducer = (state = initialState, action) => {
             ...state,
             cartList: [],
             isLoggedIn: false
+        }
+        case USER: return {
+            ...state,
+            userData: {
+                ...state.userData,
+                details: action.payload
+            }
         }
         default: return state
     }

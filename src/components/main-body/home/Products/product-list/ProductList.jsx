@@ -1,7 +1,6 @@
 import { faHeart, faShoppingCart, faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Alert, Snackbar } from '@mui/material'
-import { padding } from '@mui/system';
 import React, { useRef, useState } from 'react'
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +15,7 @@ function ProductList() {
     const perPageArr = [5, 10, 20, 50]
     const [errorMsg, setErrorMsg] = useState('');
     const isAddedToWishList = useRef(false);
-    const productList = useSelector(state => state.fetchedProductsList);
+    const productList = useSelector(state => state.products);
     const dispatch = useDispatch()
     const handlePageClick = ({ selected: selectedPage }) => {
         setCurrentPage(selectedPage)

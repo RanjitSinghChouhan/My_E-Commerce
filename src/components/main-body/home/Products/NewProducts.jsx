@@ -4,8 +4,8 @@ import banner1 from '../../../../assets/images/banner_bg_1.png'
 import { faAngleRight, faHeart, faShoppingCart, faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
 import './NewProducts.css';
 import ReactTooltip from 'react-tooltip';
-import { connect, useDispatch } from 'react-redux';
-import { addToUserCartApi, fetchProductList, loadAddToCart, loadAddToWishlist, loadFetchedProductList, loadProductList } from '../../../../redux/products/productsAction';
+import { connect } from 'react-redux';
+import { addToUserCartApi, fetchProductList, loadAddToCart, loadAddToWishlist, loadProductList } from '../../../../redux/products/productsAction';
 import ReactPaginate from 'react-paginate';
 import { Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';

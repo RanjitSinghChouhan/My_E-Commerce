@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER } from "./productTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, BILLING_DETAILS, CART_TOTAL, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER } from "./productTypes";
 
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
         cartList: []
     },
     wishList: [],
-    fetchedProductsList: []
+    fetchedProductsList: [],
+    billingDetails: {}
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -110,6 +111,10 @@ const productsReducer = (state = initialState, action) => {
                 ...state.userData,
                 details: action.payload
             }
+        }
+        case BILLING_DETAILS: return {
+            ...state,
+            billingDetails: action.payload
         }
         default: return state
     }

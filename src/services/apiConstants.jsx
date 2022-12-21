@@ -1,4 +1,4 @@
-const BASE_PATH = 'http://def9-103-185-242-80.ngrok.io/api';
+const BASE_PATH = 'http://54ca-2405-201-300b-e0dc-7879-80f6-6099-8154.ngrok.io/api';
 
 export const PATH = {
     auth: {

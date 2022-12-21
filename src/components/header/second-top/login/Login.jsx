@@ -62,7 +62,7 @@ function Login() {
                 }, 1000);
             }).catch(error => {
                 setOpen(true)
-                setErrorMsg((error.response && error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response.data.message)
+                setErrorMsg(((error.response && error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response && error.response.data.message) || error.message)
                 // alert((error.response && error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response.data.message)
             })
             setSubmitting(false)

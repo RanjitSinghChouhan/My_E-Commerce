@@ -29,8 +29,9 @@ function ProductList() {
     const handleAddToCart = async (product) => {
         var form_data = new FormData();
         form_data.append('token', localStorage.getItem("token"))
-        form_data.append('product_id', product.id)
+        form_data.append('product_id', product.id || product.product_id)
         form_data.append('qty', 1)
+        form_data.append('variant_id', product.variants ? product.variants[0].variant_id : 1)
         dispatch(addToUserCartApi(form_data)).then(response => {
             dispatch(loadAddToCart(product.product_id || product.id));
             setProductName(product.title || product.name);

@@ -1,5 +1,5 @@
 import { apiClient } from "../../services/apiConfig";
-import { ADD_TO_CART, ADD_TO_WISHLIST, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER, WISHLIST } from "./productTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, BILLING_DETAILS, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER, WISHLIST } from "./productTypes";
 import { PATH } from './../../services/apiConstants'
 
 
@@ -109,6 +109,14 @@ export const userInfo = (data) => {
     }
 }
 
+export const billingDetails = (data) => {
+    console.log(data, 'billing');
+    return {
+        type: BILLING_DETAILS,
+        payload: data
+    }
+}
+
 export const userRegistration = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadingApi())
@@ -200,3 +208,20 @@ export const fetchProductList = (data) => (dispatch) => {
         })
     })
 }
+
+// export const updateCart = (data, id) => (dispatch) => {
+//     return new Promise((resolve, reject) => {
+//         dispatch(loadingApi())
+//         apiClient({
+//             method: 'PUT',
+//             url: `${PATH.auth.cart}/${id}`,
+//             data
+//         }).then(response => {
+//             dispatch(loadingApiSuccess());
+//             resolve(response)
+//         }).catch(error => {
+//             dispatch(loadingApiFailed())
+//             reject(error)
+//         })
+//     })
+// }

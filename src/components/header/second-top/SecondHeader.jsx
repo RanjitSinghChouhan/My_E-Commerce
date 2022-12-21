@@ -43,24 +43,24 @@ function SecondHeader() {
             behavior: 'smooth',
         });
     }
-    console.log(userData, 'userData');
-    const logoutHandler = () => {
-        var form_data = new FormData();
-        form_data.append('token', localStorage.getItem("token"))
-        dispatch(logoutUser(form_data)).then(response => {
-            setOpen(true);
-            setSuccessMsg(`User is ${response.message}`)
-            // alert(`User is ${response.message}`)
-            setTimeout(() => {
-                navigate('/signin')
-            }, 800);
-            localStorage.removeItem("token")
-        }).catch(error => {
-            setOpen(true);
-            setErrorMsg(error)
-            alert(error)
-        })
-    }
+    // console.log(userData, 'userData');
+    // const logoutHandler = () => {
+    //     var form_data = new FormData();
+    //     form_data.append('token', localStorage.getItem("token"))
+    //     dispatch(logoutUser(form_data)).then(response => {
+    //         setOpen(true);
+    //         setSuccessMsg(`User is ${response.message}`)
+    //         // alert(`User is ${response.message}`)
+    //         setTimeout(() => {
+    //             navigate('/signin')
+    //         }, 800);
+    //         localStorage.removeItem("token")
+    //     }).catch(error => {
+    //         setOpen(true);
+    //         setErrorMsg(error)
+    //         alert(error)
+    //     })
+    // }
     return (
         <div>
             <header className="homepage">
@@ -107,9 +107,9 @@ function SecondHeader() {
                                                 {userData && userData.details.data && userData.details.data.customer && (userData.details.data.customer.name.toUpperCase() || userData.details.data.customer.email)}
                                             </div>
                                         </Link>
-                                        <button onClick={logoutHandler} className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
+                                        {/* <button onClick={logoutHandler} className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
                                             Logout
-                                        </button>
+                                        </button> */}
                                     </div>
                                 }
                             </div>

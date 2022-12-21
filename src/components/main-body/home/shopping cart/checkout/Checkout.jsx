@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import '../Cart.css'
 import paypalLogo from '../../../../../assets/images/paypal_logo.png'
 import { useFormik } from 'formik';
 import { Snackbar, Alert } from '@mui/material';
+import { billingDetails } from '../../../../../redux/products/productsAction';
+import { useNavigate } from 'react-router-dom';
 const initialValues = {
     'First name': '',
     'Last name': '',
@@ -71,6 +73,8 @@ function Checkout() {
     const cartTotal = useSelector(state => state.cartTotal);
     const [open, setOpen] = useState(false);
     const [firstName, setFirstName] = useState('')
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     let total = 0
     cartTotal.map(item => total += item.cost)
     const handleClose = () => {
@@ -81,6 +85,10 @@ function Checkout() {
         onSubmit: values => {
             setOpen(true)
             setFirstName(values['First name'] + ' ' + values['Last name'])
+            dispatch(billingDetails(values))
+            setTimeout(() => {
+                navigate('/')
+            }, 800);
             // alert(`Billing Details are successfully submitted as First name=${values['First name']}, Last name=${values['Last name']}, Company name=${values['Company name']}, Country / Region=${values['Country / Region']}, Street Address=${values['Street Address']}, Town / City=${values['Town / City']}, District=${values['District']}, Postcode / ZIP (optional)=${values['Postcode / ZIP (optional)']}, Phone=${values['Phone']}, Email Address=${values['Email Address']}`)
         },
         validate

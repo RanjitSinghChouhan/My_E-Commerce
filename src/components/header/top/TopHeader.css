@@ -1,65 +1,65 @@
 :root {
-    scroll-behavior: inherit;
-    --primary: #e23e9d;
-    --primary-rgb: 226, 62, 157;
-    --white: #ffffff;
-    --black: #000000;
-    --light-gray: #efefef;
-    --light-blue: #e7eaf2;
-    --footer-bg: #1f1f1f;
-    --footer-text: #8d8d8d;
-    --border-color: #e0e0e0;
-    --yellow: #ffa913;
-    --dark: #313233;
-    --body-color: #585858;
-    --error: #fe2724;
-    --transition: all 0.3s ease-in-out;
+  scroll-behavior: inherit;
+  --primary: #e23e9d;
+  --primary-rgb: 226, 62, 157;
+  --white: #ffffff;
+  --black: #000000;
+  --light-gray: #efefef;
+  --light-blue: #e7eaf2;
+  --footer-bg: #1f1f1f;
+  --footer-text: #8d8d8d;
+  --border-color: #e0e0e0;
+  --yellow: #ffa913;
+  --dark: #313233;
+  --body-color: #585858;
+  --error: #fe2724;
+  --transition: all 0.3s ease-in-out;
 }
-.top-head-bar{
-    font-size: 0.7rem;
-    text-align: center;
-    background: var(--light-gray);
-    padding: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    padding-right: 13.5%;;
-    padding-left: 13.5%;;
+.top-head-bar {
+  font-size: 0.7rem;
+  text-align: center;
+  background: var(--light-gray);
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 13.5%;
+  padding-left: 13.5%;
 }
-.top-head-bar .top-selectbox{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background: transparent;
-    border-color: transparent;
-    padding-left: 0;
-    font-weight: 600;
-    color: var(--black);
+.top-head-bar .top-selectbox {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: transparent;
+  border-color: transparent;
+  padding-left: 0;
+  font-weight: 600;
+  color: var(--black);
 }
 .top-selectbox .small::after {
-    height: 6px;
-    width: 6px;
-    margin-top: -15px;
+  height: 6px;
+  width: 6px;
+  margin-top: -15px;
 }
 .small {
-    border: none;
-    background: var(--light-gray);
-    font-size: 0.7rem;
-    padding-top: .1rem;
+  border: none;
+  background: var(--light-gray);
+  font-size: 0.7rem;
+  padding-top: 0.1rem;
 }
 
-@media(max-width: 514px){
-    .top-head-bar {
-        font-size: 0.5rem;
-    }
-    .small {
-        font-size: 0.5rem;
-    }
+@media (max-width: 514px) {
+  .top-head-bar {
+    font-size: 0.5rem;
+  }
+  .small {
+    font-size: 0.5rem;
+  }
 }
-@media(max-width: 350px){
-    .top-head-bar {
-        font-size: 0.3rem;
-    }
-    .small {
-        font-size: 0.3rem;
-    }
+@media (max-width: 350px) {
+  .top-head-bar {
+    font-size: 0.3rem;
+  }
+  .small {
+    font-size: 0.3rem;
+  }
 }

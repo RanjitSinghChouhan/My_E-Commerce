@@ -1,373 +1,387 @@
-.user-dashboard-wrap{
-    padding: 2.5rem 0;
-    margin-left: 20%;
-    margin-right: 7.5%;
+.user-dashboard-wrap {
+  padding: 2.5rem 0;
+  margin-left: 20%;
+  margin-right: 7.5%;
 }
-.user-dashboard-row{
-    display: flex;
+.user-dashboard-row {
+  display: flex;
 }
-.btn-outline-dark{
-    border: 1px solid palevioletred;
-    color: palevioletred;
-    text-decoration: none;
+.btn-outline-dark {
+  border: 1px solid palevioletred;
+  color: palevioletred;
+  text-decoration: none;
 }
 .btn-outline-dark.disabled,
 .btn-outline-dark:disabled,
 .btn-outline-dark:hover:disabled {
-    color: var(--dark);
-    background-color: transparent;
-    border-color: var(--dark);
+  color: var(--dark);
+  background-color: transparent;
+  border-color: var(--dark);
 }
 .btn-outline-dark:hover {
-    color: var(--white);
-    background-color: #282424;
-    border-color: #282424;
+  color: var(--white);
+  background-color: #282424;
+  border-color: #282424;
 }
 .btn-outline-dark.focus,
 .btn-outline-dark:focus,
 .btn-outline-dark:not(:disabled):not(.disabled).active:focus,
 .btn-outline-dark:not(:disabled):not(.disabled):active:focus,
 .show > .btn-outline-dark.dropdown-toggle:focus {
-    color: var(--white);
-    background-color: #282424;
-    border-color: #282424;
+  color: var(--white);
+  background-color: #282424;
+  border-color: #282424;
 }
 .btn-sm {
-    padding: 4% 3% 4% 3%;
-    font-size: 0.7rem;
+  padding: 4% 3% 4% 3%;
+  font-size: 0.7rem;
 }
-.my-dashboard-links{
-    background-color: var(--white);
-    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.14);
+.my-dashboard-links {
+  background-color: var(--white);
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.14);
 }
-.my-dashboard-links ul, .list-unstyled {
-    padding-inline-start: 0;
-    list-style: none;
-    text-align: left;
+.my-dashboard-links ul,
+.list-unstyled {
+  padding-inline-start: 0;
+  list-style: none;
+  text-align: left;
 }
-.my-dashboard-links ul li:not(:last-child){
-    border-bottom: 1px solid var(--border-color);
+.my-dashboard-links ul li:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
 }
-.my-dashboard-links ul li button{
-    padding: 0.7rem 1.5rem;
-    display: block;
-    font-size: 1.25rem;
-    color: var(--black);
-    text-decoration: none;
-    border: none;
-    background: white;
-    width: 100%;
-    text-align: left;
+.my-dashboard-links ul li button {
+  padding: 0.7rem 1.5rem;
+  display: block;
+  font-size: 1.25rem;
+  color: var(--black);
+  text-decoration: none;
+  border: none;
+  background: white;
+  width: 100%;
+  text-align: left;
 }
 .my-dashboard-links ul li button:hover,
-.my-dashboard-links ul li .active{
-    background-color: var(--primary);
-    color: var(--white);
+.my-dashboard-links ul li .active {
+  background-color: var(--primary);
+  color: var(--white);
 }
-.account-page-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 1.5rem;
-    background: var(--primary);
-    align-items: center;
-    text-align: left;
+.account-page-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
+  background: var(--primary);
+  align-items: center;
+  text-align: left;
 }
-.account-page-header h3{
-    color: var(--white);
-    margin: 0;
-    font-weight: 500;
+.account-page-header h3 {
+  color: var(--white);
+  margin: 0;
+  font-weight: 500;
 }
-.account-order-list, .address-details-list, .account-details{
-    background-color: var(--white);
-    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.14);    
+.account-order-list,
+.address-details-list,
+.account-details {
+  background-color: var(--white);
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.14);
 }
-.account-order-list{
-    width: 70%;  
-    margin-left: 5%;
+.account-order-list {
+  width: 70%;
+  margin-left: 5%;
 }
-.address-details-list{
-    width: 100%;  
-    margin-left: 5%;
-    margin-right: 5%;
+.address-details-list {
+  width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
-.account-details{
-    width: 100%;  
-    margin-left: 5%;
+.account-details {
+  width: 100%;
+  margin-left: 5%;
 }
-.account-order-list li:not(:last-child){
-    border-bottom: 1px solid var(--border-color);
+.account-order-list li:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
 }
-.order-list-wrap .date{
-    font-size: 80%;
-    color: var(--black);
-    font-weight: 600;
-    padding-bottom: 2%;
+.order-list-wrap .date {
+  font-size: 80%;
+  color: var(--black);
+  font-weight: 600;
+  padding-bottom: 2%;
 }
-.order-list-wrap{
-    padding: 1.5rem;
+.order-list-wrap {
+  padding: 1.5rem;
 }
-.order-items{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.order-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .order-items .item-details {
-    flex-grow: 1;
-    display: flex;
-    align-items: flex-start;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
 }
-.order-items .item-details img{
-    width: 30%;
-    margin-right: 1%;
-    border-radius: 3%;
-    background-color: rgb(231, 234, 242);      
+.order-items .item-details img {
+  width: 30%;
+  margin-right: 1%;
+  border-radius: 3%;
+  background-color: rgb(231, 234, 242);
 }
-.order-items .item-details .text{
-    width: 50%;
+.order-items .item-details .text {
+  width: 50%;
 }
-.order-items .item-details .text h3{
-    margin-top: 0;
+.order-items .item-details .text h3 {
+  margin-top: 0;
 }
 .order-items .item-details .text h3,
 .order-items .item-details .text p {
-    margin-bottom: 0.5%;
+  margin-bottom: 0.5%;
 }
-.order-items .item-details .text h3{
-    font-size: 1.125rem;
-    color: var(--black);
-    opacity: 0.7;
+.order-items .item-details .text h3 {
+  font-size: 1.125rem;
+  color: var(--black);
+  opacity: 0.7;
 }
-.order-items .item-details .text .price{
-    font-weight: 600;
-    color: var(--primary);
+.order-items .item-details .text .price {
+  font-weight: 600;
+  color: var(--primary);
 }
-.order-items .item-details .text strong{
-    margin-right: 2%;
+.order-items .item-details .text strong {
+  margin-right: 2%;
 }
 .order-items .item-buttons {
-    width: 25%;
-    flex-shrink: 0;
-    margin-left: 5%;
-    display: grid;
-    grid-gap: 0.8rem;
+  width: 25%;
+  flex-shrink: 0;
+  margin-left: 5%;
+  display: grid;
+  grid-gap: 0.8rem;
 }
-.delivery-date{
-    padding: 1rem 0 0 0;
+.delivery-date {
+  padding: 1rem 0 0 0;
 }
-.delivery-date span{
-    padding: 0.3rem 0.7rem;
-    display: inline-block;
+.delivery-date span {
+  padding: 0.3rem 0.7rem;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #fcebf5;
+  color: var(--primary);
+}
+.cancelled span {
+  background: #ffe5e5;
+  color: #ff0000;
+}
+.successful span {
+  background: #e7f4ea;
+  color: #3bc305;
+}
+.address-detail-wrap {
+  padding: 1.5rem;
+}
+.address-detail-wrap h5 {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.address-details {
+  padding: 1.5rem;
+  border-radius: 5%;
+  background: #f3f3f3;
+  font-size: 1.125rem;
+  color: #9b9b9b;
+  margin: 1.5rem;
+}
+.address-details h2 {
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+.link-pink {
+  color: palevioletred;
+  font-size: 0.8rem;
+}
+@media (max-width: 992px) {
+  .my-dashboard-links ul li button {
     font-size: 1rem;
-    font-weight: 600;
-    background-color: #fcebf5;
-    color: var(--primary);
-}
-.cancelled span{
-    background: #ffe5e5;
-    color: #ff0000;
-}
-.successful span{
-    background: #e7f4ea;
-    color: #3bc305;
-}
-.address-detail-wrap{
-    padding: 1.5rem;
-}
-.address-detail-wrap h5{
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: 400;
-}
-.address-details{
-    padding: 1.5rem;
-    border-radius: 5%;
-    background: #f3f3f3;
-    font-size: 1.125rem;
-    color: #9b9b9b;
-    margin: 1.5rem;
-}
-.address-details h2{
-    font-size: 1.5rem;
-    color: var(--black);
-}
-
-.link-pink{
-    color: palevioletred;
+  }
+  .delivery-date span {
     font-size: 0.8rem;
-}
-@media (max-width: 992px){
-    .my-dashboard-links ul li button{
-        font-size: 1rem;
-    }
-    .delivery-date span{
-        font-size: 0.8rem;
-    }
-    .btn-sm, .link-pink {
-        font-size: 0.6rem;
-    }
-    .order-items .item-details .text h3{
-        font-size: 0.8rem;
-    }
-    .order-items .item-details .text p{
-        font-size: 0.6rem;
-    }
-    .account-order-list .list-unstyled{
-        padding: 0rem 0.5rem;
-    }
-    .order-list-wrap{
-        padding: 0.8rem;
-    }
-    .order-items .item-buttons {
-        grid-gap: 0.6rem;
-    }
-    .order-items .item-buttons {
-        grid-gap: 0.25rem;
-    }
+  }
+  .btn-sm,
+  .link-pink {
+    font-size: 0.6rem;
+  }
+  .order-items .item-details .text h3 {
+    font-size: 0.8rem;
+  }
+  .order-items .item-details .text p {
+    font-size: 0.6rem;
+  }
+  .account-order-list .list-unstyled {
+    padding: 0rem 0.5rem;
+  }
+  .order-list-wrap {
+    padding: 0.8rem;
+  }
+  .order-items .item-buttons {
+    grid-gap: 0.6rem;
+  }
+  .order-items .item-buttons {
+    grid-gap: 0.25rem;
+  }
 }
 
-@media (max-width: 770px){
-
+@media (max-width: 770px) {
 }
 
-@media (max-width: 672px){
-    .my-dashboard-links ul li button{
-        font-size: 0.8rem;
-    }
-    .delivery-date span{
-        font-size: 0.7rem;
-    }
-    .btn-sm, .link-pink {
-        font-size: 0.4rem;
-    }
-    .order-items .item-details .text h3{
-        font-size: 0.6rem;
-    }
-    .order-items .item-details .text p{
-        font-size: 0.4rem;
-    }
-    .order-list-wrap .date{
-        font-size: 60%;
-    }
-    .order-list-wrap{
-        padding: 0.6rem;
-    }
-    .order-items .item-buttons {
-        grid-gap: 0.2rem;
-    }
+@media (max-width: 672px) {
+  .my-dashboard-links ul li button {
+    font-size: 0.8rem;
+  }
+  .delivery-date span {
+    font-size: 0.7rem;
+  }
+  .btn-sm,
+  .link-pink {
+    font-size: 0.4rem;
+  }
+  .order-items .item-details .text h3 {
+    font-size: 0.6rem;
+  }
+  .order-items .item-details .text p {
+    font-size: 0.4rem;
+  }
+  .order-list-wrap .date {
+    font-size: 60%;
+  }
+  .order-list-wrap {
+    padding: 0.6rem;
+  }
+  .order-items .item-buttons {
+    grid-gap: 0.2rem;
+  }
 }
 
-@media (max-width: 535px){
-    .my-dashboard-links ul li button{
-        font-size: 0.7rem;
-    }
-    .delivery-date span{
-        font-size: 0.4rem;
-    }
-    .btn-sm, .link-pink {
-        font-size: 0.3rem;
-    }
-    .order-items .item-details .text h3{
-        font-size: 0.5rem;
-    }
-    .order-items .item-details .text p{
-        font-size: 0.3rem;
-    }
-    .order-list-wrap .date{
-        font-size: 40%;
-    }
-    .order-list-wrap{
-        padding: 0.4rem;
-    }
-    .order-items .item-buttons {
-        grid-gap: 0.15rem;
-    }
-    .address-detail-wrap{
-        padding: 0.5rem
-    }
-    .address-detail-wrap h5{
-        font-size: 1rem;
-    }
-    .address-details{
-        padding: 0.5rem;
-        margin: 1rem;
-    }
-    .address-details h2, .address-details button, .address-details p{
-        font-size: 0.5rem;
-    }
+@media (max-width: 535px) {
+  .my-dashboard-links ul li button {
+    font-size: 0.7rem;
+  }
+  .delivery-date span {
+    font-size: 0.4rem;
+  }
+  .btn-sm,
+  .link-pink {
+    font-size: 0.3rem;
+  }
+  .order-items .item-details .text h3 {
+    font-size: 0.5rem;
+  }
+  .order-items .item-details .text p {
+    font-size: 0.3rem;
+  }
+  .order-list-wrap .date {
+    font-size: 40%;
+  }
+  .order-list-wrap {
+    padding: 0.4rem;
+  }
+  .order-items .item-buttons {
+    grid-gap: 0.15rem;
+  }
+  .address-detail-wrap {
+    padding: 0.5rem;
+  }
+  .address-detail-wrap h5 {
+    font-size: 1rem;
+  }
+  .address-details {
+    padding: 0.5rem;
+    margin: 1rem;
+  }
+  .address-details h2,
+  .address-details button,
+  .address-details p {
+    font-size: 0.5rem;
+  }
 }
 
-@media (max-width: 435px){
-    .my-dashboard-links ul li button{
-        font-size: 0.6rem;
-    }
-    .delivery-date span{
-        font-size: 0.3rem;
-    }
-    .btn-sm, .link-pink {
-        font-size: 0.2rem;
-    }
-    .order-items .item-details .text h3{
-        font-size: 0.4rem;
-    }
-    .order-items .item-details .text p{
-        font-size: 0.2rem;
-    }
-    .order-list-wrap .date{
-        font-size: 30%;
-    }
-    .account-order-list .account-page-header h3{
-        font-size: 0.6rem;
-    }
-    .order-list-wrap{
-        padding: 0.2rem;
-    }
-    .order-items .item-buttons {
-        grid-gap: 0.1rem;
-    }
-    .address-details h2, .address-details button, .address-details p{
-        font-size: 0.3rem;
-    }
-    .address-detail-wrap input, .address-detail-wrap button{
-        width: 50%;
-        font-size: 0.5rem;
-    }
-    .address-detail-wrap button{
-        padding: 0.3rem 0.5rem;
-    }
+@media (max-width: 435px) {
+  .my-dashboard-links ul li button {
+    font-size: 0.6rem;
+  }
+  .delivery-date span {
+    font-size: 0.3rem;
+  }
+  .btn-sm,
+  .link-pink {
+    font-size: 0.2rem;
+  }
+  .order-items .item-details .text h3 {
+    font-size: 0.4rem;
+  }
+  .order-items .item-details .text p {
+    font-size: 0.2rem;
+  }
+  .order-list-wrap .date {
+    font-size: 30%;
+  }
+  .account-order-list .account-page-header h3 {
+    font-size: 0.6rem;
+  }
+  .order-list-wrap {
+    padding: 0.2rem;
+  }
+  .order-items .item-buttons {
+    grid-gap: 0.1rem;
+  }
+  .address-details h2,
+  .address-details button,
+  .address-details p {
+    font-size: 0.3rem;
+  }
+  .address-detail-wrap input,
+  .address-detail-wrap button {
+    width: 50%;
+    font-size: 0.5rem;
+  }
+  .address-detail-wrap button {
+    padding: 0.3rem 0.5rem;
+  }
 }
 
-@media (max-width: 335px){
-    .my-dashboard-links ul li button{
-        font-size: 0.4rem;
-    }
-    .delivery-date span{
-        font-size: 0.2rem;
-    }
-    .btn-sm, .link-pink {
-        font-size: 0.1rem;
-    }
-    .order-items .item-details .text h3{
-        font-size: 0.3rem;
-    }
-    .order-items .item-details .text p{
-        font-size: 0.1rem;
-    }
-    .order-list-wrap .date{
-        font-size: 20%;
-    }
-    .account-order-list .account-page-header h3{
-        font-size: 0.48rem;
-    }
-    .order-list-wrap{
-        padding: 0rem;
-    }
-    .order-items .item-buttons {
-        grid-gap: 0.09rem;
-    }
-    .address-details h2, .address-details button, .address-details p{
-        font-size: 0.2rem;
-    }
-    .address-details button{
-        padding: 0.2rem 0.4rem
-    }
+@media (max-width: 335px) {
+  .my-dashboard-links ul li button {
+    font-size: 0.4rem;
+  }
+  .delivery-date span {
+    font-size: 0.2rem;
+  }
+  .btn-sm,
+  .link-pink {
+    font-size: 0.1rem;
+  }
+  .order-items .item-details .text h3 {
+    font-size: 0.3rem;
+  }
+  .order-items .item-details .text p {
+    font-size: 0.1rem;
+  }
+  .order-list-wrap .date {
+    font-size: 20%;
+  }
+  .account-order-list .account-page-header h3 {
+    font-size: 0.48rem;
+  }
+  .order-list-wrap {
+    padding: 0rem;
+  }
+  .order-items .item-buttons {
+    grid-gap: 0.09rem;
+  }
+  .address-details h2,
+  .address-details button,
+  .address-details p {
+    font-size: 0.2rem;
+  }
+  .address-details button {
+    padding: 0.2rem 0.4rem;
+  }
 }

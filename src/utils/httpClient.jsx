@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_PATH = 'http://localhost:8000/admin';
+export const BASE_PATH = 'https://my-e-commerce-be.onrender.com/admin';
 
 const axiosClient = axios.create({
     baseURL: BASE_PATH

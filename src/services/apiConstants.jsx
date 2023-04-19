@@ -1,4 +1,4 @@
-const BASE_PATH = 'http://localhost:8000/admin';
+const BASE_PATH = 'https://my-e-commerce-be.onrender.com/admin';
 
 export const PATH = {
     auth: {

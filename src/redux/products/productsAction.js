@@ -1,6 +1,7 @@
 import { apiClient } from "../../services/apiConfig";
 import { ADD_TO_CART, ADD_TO_WISHLIST, BILLING_DETAILS, CART_TOTAL, CART_TOTALS, DECREASE_QUANTITY, FETCHED_PRODUCT_LIST, INCREASE_QUANTITY, LOADING, LOADING_FAILED, LOADING_SUCCESS, LOGGEDIN, LOGGED_OUT, LOGIN_USER, PRODUCTS_LIST, PRODUCT_LIST, REMOVE_CART_PRODUCT, REMOVE_FROM_WISHLIST, SEARCH, USER, WISHLIST } from "./productTypes";
 import { PATH } from './../../services/apiConstants'
+import axiosClient from "../../utils/httpClient";
 
 
 export const loadProductList = (item = null, isFetched = false) => {
@@ -110,7 +111,6 @@ export const userInfo = (data) => {
 }
 
 export const billingDetails = (data) => {
-    console.log(data, 'billing');
     return {
         type: BILLING_DETAILS,
         payload: data
@@ -120,7 +120,7 @@ export const billingDetails = (data) => {
 export const userRegistration = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadingApi())
-        apiClient({
+        axiosClient({
             method: 'POST',
             url: PATH.auth.signup,
             data
@@ -137,13 +137,12 @@ export const userRegistration = (data) => (dispatch) => {
 export const loginUser = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadingApi())
-        apiClient({
+        axiosClient({
             method: 'POST',
             url: PATH.auth.login,
             data
         }).then((response) => {
             dispatch(loadingApiSuccess())
-            dispatch(userInfo(response.data))
             dispatch(loggedIn())
             resolve(response.data);
         }).catch((error) => {
@@ -153,17 +152,16 @@ export const loginUser = (data) => (dispatch) => {
     })
 };
 
-export const logoutUser = (data) => (dispatch) => {
+export const userDetails = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadingApi())
-        apiClient({
-            method: 'POST',
-            url: PATH.auth.logout,
+        axiosClient({
+            method: 'GET',
+            url: PATH.auth.userDetails,
             data
         }).then(response => {
             dispatch(loadingApiSuccess())
-            dispatch(userInfo(''))
-            dispatch(loggedOut())
+            dispatch(userInfo(response.data))
             resolve(response.data)
         }).catch(error => {
             dispatch(loadingApiFailed())
@@ -175,8 +173,7 @@ export const logoutUser = (data) => (dispatch) => {
 export const addToUserCartApi = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadingApi())
-        console.log(data, "actioncart");
-        apiClient({
+        axiosClient({
             method: 'POST',
             url: PATH.auth.cart,
             data

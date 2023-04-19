@@ -17,7 +17,6 @@ const initialState = {
 }
 
 const productsReducer = (state = initialState, action) => {
-    console.log(state, 'state', action, 'action');
     let subtotal = 0;
     state.cartList.map(item => subtotal += item.price);
     switch (action.type) {

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MainCart from '../../../main-body/home/shopping cart/cart-main-banner/MainCart'
 import './MyAccount.css'
-import { logoutUser } from '../../../../redux/products/productsAction'
 import { useNavigate } from 'react-router-dom'
 import { Snackbar, Alert } from '@mui/material';
 
@@ -33,19 +32,8 @@ function MyAccount() {
         setIsAccount(true);
     }
     const logoutHandler = () => {
-        var form_data = new FormData();
-        form_data.append('token', localStorage.getItem("token"))
-        dispatch(logoutUser(form_data)).then(response => {
-            setOpen(true);
-            setSuccessMsg(`User is ${response.message}`)
-            setTimeout(() => {
-                navigate('/signin')
-            }, 800);
-            localStorage.removeItem("token")
-        }).catch(error => {
-            setOpen(true);
-            setErrorMsg(error)
-        })
+            localStorage.removeItem("token");
+            window.location.pathname = '/signin'
     }
     const handleClose = () => {
         setOpen(false)

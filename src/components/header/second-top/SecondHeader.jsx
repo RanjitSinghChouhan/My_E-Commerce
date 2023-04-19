@@ -7,10 +7,11 @@ import './SecondHeader.css'
 import ReactTooltip from 'react-tooltip'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadProductList, logoutUser } from '../../../redux/products/productsAction'
+import { loadProductList, logoutUser, userDetails } from '../../../redux/products/productsAction'
 import { Snackbar, Alert } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useEffect } from 'react'
 
 
 function SecondHeader() {
@@ -43,24 +44,28 @@ function SecondHeader() {
             behavior: 'smooth',
         });
     }
-    // console.log(userData, 'userData');
-    // const logoutHandler = () => {
-    //     var form_data = new FormData();
-    //     form_data.append('token', localStorage.getItem("token"))
-    //     dispatch(logoutUser(form_data)).then(response => {
-    //         setOpen(true);
-    //         setSuccessMsg(`User is ${response.message}`)
-    //         // alert(`User is ${response.message}`)
-    //         setTimeout(() => {
-    //             navigate('/signin')
-    //         }, 800);
-    //         localStorage.removeItem("token")
-    //     }).catch(error => {
-    //         setOpen(true);
-    //         setErrorMsg(error)
-    //         alert(error)
-    //     })
-    // }
+
+    const logoutHandler = () => {
+        // var form_data = new FormData();
+        // form_data.append('token', localStorage.setItem(""))
+        // dispatch(logoutUser(form_data)).then(response => {
+        //     setOpen(true);
+        //     setSuccessMsg(`User is ${response.message}`)
+        //     // alert(`User is ${response.message}`)
+        //     setTimeout(() => {
+        //         navigate('/signin')
+        //     }, 800);
+            localStorage.removeItem("token")
+            window.location.pathname = '/signin'
+        // }).catch(error => {
+        //     setOpen(true);
+        //     setErrorMsg(error)
+        //     alert(error)
+        // })
+    }
+    useEffect(() => {
+        dispatch(userDetails())
+    }, [dispatch])
     return (
         <div>
             <header className="homepage">
@@ -89,7 +94,7 @@ function SecondHeader() {
                         </div>
                         <div className="right-login">
                             <div className="bs-links">
-                                {!isLoggedIn ? <>
+                                {!userData?.details?.data ? <>
                                     <Link to='signin'>
                                         <button className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
                                             Login
@@ -104,12 +109,12 @@ function SecondHeader() {
                                     <div style={{ border: 'none', backgroundColor: 'white', display: 'block' }}>
                                         <Link to='my_account'>
                                             <div>
-                                                {userData && userData.details.data && userData.details.data.customer && (userData.details.data.customer.name.toUpperCase() || userData.details.data.customer.email)}
+                                                {userData && userData.details.data && (userData.details.data.name.toUpperCase() || userData.details.data.email)}
                                             </div>
                                         </Link>
-                                        {/* <button onClick={logoutHandler} className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
+                                        <button onClick={logoutHandler} className="loginSignup" style={{ border: 'none', backgroundColor: 'white' }}>
                                             Logout
-                                        </button> */}
+                                        </button>
                                     </div>
                                 }
                             </div>

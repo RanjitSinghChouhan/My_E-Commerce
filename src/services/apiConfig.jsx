@@ -2,7 +2,7 @@ import axios from 'axios'
 import { PATH } from './apiConstants';
 
 
-const access_token = localStorage.setItem('token', JSON.stringify(''));
+const access_token = localStorage.getItem('token');
 const defaultHeaders = {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
@@ -16,7 +16,6 @@ export function apiClient({
     noHeaders,
     ...rest
 }) {
-    console.log('url', url, data, method, headers, access_token);
     if (access_token === '' || access_token === null) {
         delete axios.defaults.headers.common['Authorization'];
     }

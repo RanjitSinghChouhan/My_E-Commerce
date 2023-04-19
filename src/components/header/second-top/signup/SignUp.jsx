@@ -65,8 +65,7 @@ function SignUp() {
             dispatch(userRegistration(values))
                 .then(response => {
                     setOpen(true)
-                    setSuccessMsg(response.data.data.customer.name || (response.data && response.data.message))
-                    // alert((response.data && response.data.message) || `${response.data.data.customer.name} is Registerred successfully`)
+                    setSuccessMsg(response?.data?.data?.name || (response?.data?.message))
                     setTimeout(() => {
                         navigate('/signin')
                     }, 1000);
@@ -74,7 +73,6 @@ function SignUp() {
                 .catch(error => {
                     setOpen(true)
                     setErrorMsg((error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response.data.message)
-                    // alert((error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response.data.message)
                 })
             setSubmitting(false)
         },

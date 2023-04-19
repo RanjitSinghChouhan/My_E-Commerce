@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser } from '../../../../redux/products/productsAction'
+import { loginUser, userDetails } from '../../../../redux/products/productsAction'
 import MainCart from '../../../main-body/home/shopping cart/cart-main-banner/MainCart'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -46,24 +46,22 @@ function Login() {
     }
     // const submitLoginHandler = (e) => {
     //     e.preventDefault()
-    //     console.log(formLoginValues);
     //     dispatch(loginUser(formLoginValues))
     // }
     const formik = useFormik({
         initialValues,
         onSubmit: (values, { props, setSubmitting }) => {
             dispatch(loginUser(values)).then(response => {
-                localStorage.setItem('token', response.data.authorization.token);
+                localStorage.setItem("token", response.accessToken);
                 setOpen(true)
-                setSuccessMsg(response.data.customer.name || (response.data && response.data.message))
-                // alert((response.data && response.data.message) || `${response.data.customer.name} is logged in successfully`);
+                setSuccessMsg(response?.data?.name || response.message)
                 setTimeout(() => {
+                    dispatch(userDetails())
                     navigate('/')
                 }, 1000);
             }).catch(error => {
                 setOpen(true)
                 setErrorMsg(((error.response && error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response && error.response.data.message) || error.message)
-                // alert((error.response && error.response.data && error.response.data.error) ? error.response.data.message + " because " + (error.response.data.error.email || error.response.data.error.password) : error.response.data.message)
             })
             setSubmitting(false)
         },
